@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "jianifan",
+    "password": "456Ggfr2",
+    "database": "haiku_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "jianifan",
+    "password": "456Ggfr2",
+    "database": "haiku_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "jianifan",
+    "password": "456Ggfr2",
+    "database": "haiku_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
