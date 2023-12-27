@@ -3,7 +3,7 @@
 const express = require('express');
 const { Op } = require('sequelize');
 const Haiku = require('../models/haikuModel');
-const convertImageToJpeg = require('./imageConverter');
+const { downloadImageFromUrl } = require('../utils/imgDownloader'); 
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   try {
     const { haiku, image_url } = req.body;
-    const transformedImageBuffer = convertImageToJpeg(image_url);
+    const transformedImageBuffer = downloadImageFromUrl(image_url);
     const newHaiku = await Haiku.create({ haiku, transformedImageBuffer });
     res.json(newHaiku);
   } catch (error) {
