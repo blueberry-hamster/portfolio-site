@@ -12,6 +12,7 @@ function formatHaikuData(haikuData) {
   return {
     haiku: haikuData.haiku,
     image: `data:image/jpeg;base64,${haikuData.image.toString('base64')}`,
+    date: haikuData.createdAt
   };
 }
 
@@ -27,32 +28,25 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get today's haiku with image in the desired format
-router.get('/today', async (req, res) => {
+/// Get the newest haiku with image in the desired format
+router.get('/newest', async (req, res) => {
   try {
-    // Get the current date in 'YYYY-MM-DD' format
-    const currentDate = new Date().toISOString().split('T')[0];
-
-    // Find the haiku for today
-    const todayHaiku = await Haiku.findOne({
-      where: {
-        createdAt: {
-          [Op.gte]: new Date(currentDate), // Greater than or equal to the start of the date
-          [Op.lt]: new Date(currentDate + 'T23:59:59.999Z'), // Less than the end of the date
-        },
-      },
+    // Find the newest haiku with the latest timestamp
+    const newestHaiku = await Haiku.findOne({
+      order: [['createdAt', 'DESC']], // Order by createdAt in descending order (latest first)
     });
 
-    if (!todayHaiku) {
-      res.status(404).json({ error: 'No haiku found for today' });
+    if (!newestHaiku) {
+      res.status(404).json({ error: 'No haiku found' });
       return;
     }
 
-    res.json(formatHaikuData(todayHaiku));
+    res.json(formatHaikuData(newestHaiku));
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred while fetching today\'s haiku' });
+    res.status(500).json({ error: 'An error occurred while fetching the newest haiku' });
   }
 });
+
 
 // Get haikus on a specific date
 // ex "/haikus/2023-12-08"
