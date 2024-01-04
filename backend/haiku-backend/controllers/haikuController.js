@@ -47,15 +47,36 @@ router.get('/newest', async (req, res) => {
   }
 });
 
+// Get haikus for the carousel starting with the newest ones
+router.get('/carousel', async (req, res) => {
+  try {
+    const { offset, limit } = req.query;
+
+    // Query the database to get haikus, ordered by createdAt in descending order (latest first)
+    const haikus = await Haiku.findAll({
+      order: [['createdAt', 'DESC']],
+      offset: parseInt(offset || 0, 10), // Parse offset as an integer
+      limit: parseInt(limit || 5, 10),    // Parse limit as an integer
+    });
+
+    // Format each haiku and return as an array
+    const formattedHaikus = haikus.map((haikuData) => formatHaikuData(haikuData));
+
+    res.json({ haikus: formattedHaikus });
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while fetching haikus for the carousel' });
+  }
+});
+
 
 // Get haikus on a specific date
-// ex "/haikus/2023-12-08"
+// ex "/haikus/2023-12-31"
 router.get('/:date', async (req, res) => {
   try {
     const { date } = req.params;
 
     // Assuming the date format is 'YYYY-MM-DD'
-    const haikus = await Haiku.findAll({
+    const haikuData = await Haiku.findOne({
       where: {
         createdAt: {
           [Op.gte]: new Date(date), // Greater than or equal to the start of the date
@@ -65,12 +86,13 @@ router.get('/:date', async (req, res) => {
     });
 
     // Format each haiku and return as an array
-    const formattedHaikus = haikus.map((haikuData) => formatHaikuData(haikuData));
+    const formattedHaiku = formatHaikuData(haikuData);
 
-    res.json({ haikus: formattedHaikus });
+    res.json(formattedHaiku);
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while fetching haikus' });
   }
 });
+
 
 module.exports = router;

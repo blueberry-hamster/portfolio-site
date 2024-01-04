@@ -13,11 +13,13 @@ const Haiku = sequelize.define('Haiku', {
   createdAt: {
     type: DataTypes.DATE,
     allowNull: false,
+    defaultValue: DataTypes.NOW,
     field: 'created_at', // Map to the "created_at" column in the table
   },
   updatedAt: {
     type: DataTypes.DATE,
     allowNull: false,
+    defaultValue: DataTypes.NOW,
     field: 'updated_at', // Map to the "updated_at" column in the table
   },
 }, {

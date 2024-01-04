@@ -3,6 +3,7 @@ const schedule = require('node-schedule');
 const Haiku = require('../models/haikuModel');
 const { downloadImageFromUrl } = require('./imgDownloader');
 
+
 // Function to run at midnight
 const generateHaikuAndImage = async () => {
   try {

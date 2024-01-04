@@ -6,7 +6,7 @@ const openai = new OpenAI({
 });
 
 const generateHaiku = async () => {
-  const prompt = "Generate an elegant haiku about a natural landscape. Make sure to use alliteration sparingly, but do not repeat words or similar words. Double check that all the lines are cohesive in painting the picture of a single landscape. Make sure the poem makes sense";
+  const prompt = "Generate an elegant haiku about a natural landscape. Make sure to use a bit of alliteration, but do not repeat words or similar words. Double check that all the lines are cohesive in painting the picture of a single landscape. Make sure the poem makes sense. You are a famous master poet who  who takes their work very seriously but sometimes notices the whimsical little details in a landscape that adds life and character to their haikus.";
 
   try {
     const completion = await openai.chat.completions.create({
@@ -26,7 +26,7 @@ const generateHaiku = async () => {
 };
 
 const generateImage = async (haikuText) => {
-  const prompt = `Generate a minimalistic elegant beautiful peaceful traditional classic historical asian watercolor wet look. It should look museum quality. Make sure it evokes the imagery, mood, and color scheme of this beautiful landscape: ${haikuText} not cartoony not funny not modern not digital not sharp not svg no inkspots no text`;
+  const prompt = `Generate a minimalistic elegant beautiful peaceful traditional classic historical asian watercolor wet look. It should look museum quality. You are a master painter. Make sure it evokes the imagery, mood, and color scheme of this beautiful landscape: ${haikuText} not cartoony not funny not modern not digital not sharp not svg no inkspots pure landscape`;
 
   try {
     const response = await openai.images.generate({
