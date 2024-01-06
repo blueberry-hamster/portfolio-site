@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { DatePicker } from 'react-datepicker'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Container = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const HaikuCard = styled.div`
 const HaikuText = styled.div`
   color: #131313;
   font-size: 16px;
-  margin-bottom: 30px
+  margin-bottom: 30px;
 
   & p {
     margin-bottom: -10px;
@@ -51,28 +52,41 @@ const LoadingScreen = styled.div`
   color: #333;
   text-align: center;
 `;
-const test = 1;
+
+const ErrorScreen = styled.div`
+  font-size: 20px;
+  color: red;
+  text-align: center;
+`;
 
 const HaikuComponent = () => {
   const [haikuData, setHaikuData] = useState({
-    date: new Date().toISOString().split('T')[0], // Provide a default value
-    haiku: '', // Provide a default value
-    image: '', // Provide a default value
+    date: new Date().toLocaleDateString(), // Provide a default value in desired format
+    haiku: 'loading haiku',
+    image: '',
   });
   const [loading, setLoading] = useState(true);
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [error, setError] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with a valid date object
 
   useEffect(() => {
+    setError(false);
 
-    fetch(`http://localhost:3307/haikus/${selectedDate}`)
+    fetch(`http://localhost:3307/haikus/${selectedDate.toISOString().split('T')[0]}`) // Format the selected date properly
       .then((response) => response.json())
       .then((data) => {
-        setHaikuData(data.formattedHaiku);
-        setLoading(false); // Set loading to false once data is fetched
+        if (data && data.haiku) {
+          data.date = new Date(data.date).toLocaleDateString();
+          setHaikuData(data);
+        } else {
+          setError(true);
+        }
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching haiku:', error);
-        setLoading(false); // Set loading to false on error
+        setLoading(false);
+        setError(true);
       });
   }, [selectedDate]);
 
@@ -80,20 +94,18 @@ const HaikuComponent = () => {
     <Container>
       <Title>AI Daily Haiku</Title>
       {loading ? (
-        // Display a loading screen while data is being fetched
         <LoadingScreen>Loading...</LoadingScreen>
+      ) : error ? (
+        <ErrorScreen>Oops, couldn't fetch haiku.</ErrorScreen>
       ) : (
         <HaikuCard>
-          {haikuData && haikuData.date && (
-            <HaikuDate>{haikuData.date}</HaikuDate>
-          )}
           <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} />
           <HaikuText>
-            {haikuData && haikuData.haiku && haikuData.haiku.split('<br />').map((line, lineIndex) => (
+            {haikuData.haiku.split('<br />').map((line, lineIndex) => (
               <p key={lineIndex}>{line}</p>
             ))}
           </HaikuText>
-          <HaikuImage src={haikuData && haikuData.image} alt={`Haiku ${haikuData && haikuData.date}`} />
+          <HaikuImage src={haikuData.image} alt={`Haiku ${haikuData.date}`} />
         </HaikuCard>
       )}
     </Container>
