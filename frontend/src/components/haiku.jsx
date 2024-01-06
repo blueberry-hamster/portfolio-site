@@ -66,7 +66,7 @@ const HaikuComponent = () => {
   const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with a valid date object
   // Calculate the maxDate to disable future dates
   const maxDate = new Date();
-  maxDate.setHours(0, 0, 0, 0); 
+  // maxDate.setHours(0, 0, 0, 0); 
 
   useEffect(() => {
     setError(false);
@@ -96,6 +96,8 @@ const HaikuComponent = () => {
           <DatePicker
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
+            shouldCloseOnSelect={true}
+            todayButton="Today"
             minDate={new Date("2023-12-28")} // Set the minimum date to "12/27/2023"
             maxDate={maxDate} // Set the maximum date to disable future dates
           />
