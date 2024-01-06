@@ -1,0 +1,18 @@
+$hoverColor: #d33737;
+
+.react-datepicker__input-container {
+  input {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+      color: $hoverColor;
+    }
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}

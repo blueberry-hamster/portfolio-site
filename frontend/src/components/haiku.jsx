@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
+import './datePicker.scss'
 
 const Container = styled.div`
   display: flex;
@@ -42,11 +43,6 @@ const HaikuImage = styled.img`
   border-radius: 8px;
 `;
 
-const HaikuDate = styled.h3`
-  font-size: 20px;
-  margin-top: 10px;
-`;
-
 const LoadingScreen = styled.div`
   font-size: 20px;
   color: #333;
@@ -68,6 +64,9 @@ const HaikuComponent = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with a valid date object
+  // Calculate the maxDate to disable future dates
+  const maxDate = new Date();
+  maxDate.setHours(0, 0, 0, 0); 
 
   useEffect(() => {
     setError(false);
@@ -91,24 +90,33 @@ const HaikuComponent = () => {
   }, [selectedDate]);
 
   return (
-    <Container>
-      <Title>AI Daily Haiku</Title>
-      {loading ? (
-        <LoadingScreen>Loading...</LoadingScreen>
-      ) : error ? (
-        <ErrorScreen>Oops, couldn't fetch haiku.</ErrorScreen>
-      ) : (
+      <Container>
+        <Title>AI Daily Haiku</Title>
         <HaikuCard>
-          <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} />
-          <HaikuText>
-            {haikuData.haiku.split('<br />').map((line, lineIndex) => (
-              <p key={lineIndex}>{line}</p>
-            ))}
-          </HaikuText>
-          <HaikuImage src={haikuData.image} alt={`Haiku ${haikuData.date}`} />
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            minDate={new Date("2023-12-28")} // Set the minimum date to "12/27/2023"
+            maxDate={maxDate} // Set the maximum date to disable future dates
+          />
+          {loading ? (
+            <LoadingScreen>Loading...</LoadingScreen>
+          ) : error ? (
+            <ErrorScreen>
+              <p>Oops, couldn't fetch haiku.</p>
+            </ErrorScreen>
+          ) : (
+            <>
+              <HaikuText>
+                {haikuData.haiku.split('<br />').map((line, lineIndex) => (
+                  <p key={lineIndex}>{line}</p>
+                ))}
+              </HaikuText>
+              <HaikuImage src={haikuData.image} alt={`Haiku ${haikuData.date}`} />
+            </>
+          )}
         </HaikuCard>
-      )}
-    </Container>
+      </Container>
   );
 };
 
