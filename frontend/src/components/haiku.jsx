@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 24px;
-  margin: 50px 0px;
+  margin: 30px 0px;
 `;
 
 const HaikuCard = styled.div`
@@ -90,35 +90,35 @@ const HaikuComponent = () => {
   }, [selectedDate]);
 
   return (
-      <Container>
-        <Title>AI Daily Haiku</Title>
-        <HaikuCard>
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-            shouldCloseOnSelect={true}
-            todayButton="Today"
-            minDate={new Date("2023-12-28")} // Set the minimum date to "12/27/2023"
-            maxDate={maxDate} // Set the maximum date to disable future dates
-          />
-          {loading ? (
-            <LoadingScreen>Loading...</LoadingScreen>
-          ) : error ? (
-            <ErrorScreen>
-              <p>Oops, couldn't fetch haiku.</p>
-            </ErrorScreen>
-          ) : (
-            <>
-              <HaikuText>
-                {haikuData.haiku.split('<br />').map((line, lineIndex) => (
-                  <p key={lineIndex}>{line}</p>
-                ))}
-              </HaikuText>
-              <HaikuImage src={haikuData.image} alt={`Haiku ${haikuData.date}`} />
-            </>
-          )}
-        </HaikuCard>
-      </Container>
+    <Container>
+      <Title>A Daily Haiku</Title>
+      <HaikuCard>
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          shouldCloseOnSelect={true}
+          // todayButton="Today"
+          minDate={new Date("2023-12-28")} // Set the minimum date to "12/27/2023"
+          maxDate={maxDate} // Set the maximum date to disable future dates
+        />
+        {loading ? (
+          <LoadingScreen>Loading...</LoadingScreen>
+        ) : error ? (
+          <ErrorScreen>
+            <p>Oops, couldn't fetch haiku.</p>
+          </ErrorScreen>
+        ) : (
+          <>
+            <HaikuText>
+              {haikuData.haiku.split('<br />').map((line, lineIndex) => (
+                <p key={lineIndex}>{line}</p>
+              ))}
+            </HaikuText>
+            <HaikuImage src={haikuData.image} alt={`Haiku ${haikuData.date}`} />
+          </>
+        )}
+      </HaikuCard>
+    </Container>
   );
 };
 

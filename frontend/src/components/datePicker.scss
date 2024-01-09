@@ -1,4 +1,16 @@
 $hoverColor: #d33737;
+$light-grey: #e3dede;
+
+.react-datepicker {
+  border: 1px solid $light-grey;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker__triangle {
+  ::before {
+    border-bottom-color: $light-grey;
+  }
+}
 
 .react-datepicker__input-container {
   input {
@@ -15,4 +27,8 @@ $hoverColor: #d33737;
       outline: none;
     }
   }
+}
+
+.react-datepicker__header {
+  border: none;
 }
