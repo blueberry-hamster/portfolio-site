@@ -20,10 +20,11 @@ const Title = styled.h2`
 
 const HaikuCard = styled.div`
   border: 1px solid #e6e6e6;
+  background-color: white;
   padding: 20px;
   max-width: 700px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  filter: drop-shadow(0.1em 0.2em 0.2em rgba(62, 8, 36, 0.1));
   border-radius: 8px;
 `;
 
