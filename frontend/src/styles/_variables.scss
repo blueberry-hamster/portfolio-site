@@ -1,0 +1,11 @@
+$text-primary: #1c1111;
+$text-secondary: #4d4848;
+$text-accent: #882f2f;
+$white: #fff;
+
+:export {
+  textPrimary: $text-primary;
+  textSecondary: $text-secondary;
+  textAccent: $text-accent;
+  white: $white;
+}

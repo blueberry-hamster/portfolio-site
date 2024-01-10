@@ -10,11 +10,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
+  box-sizing: border-box;
   background-color: white;
 `;
 
-const Title = styled.h1`
-  font-size: 24px;
+const Title = styled.h2`
   margin: 30px 0px;
 `;
 
@@ -66,7 +66,7 @@ const HaikuComponent = () => {
   const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with a valid date object
   // Calculate the maxDate to disable future dates
   const maxDate = new Date();
-  // maxDate.setHours(0, 0, 0, 0); 
+  maxDate.setHours(23, 59, 59, 999) 
 
   useEffect(() => {
     setError(false);
@@ -97,15 +97,14 @@ const HaikuComponent = () => {
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
           shouldCloseOnSelect={true}
-          // todayButton="Today"
-          minDate={new Date("2023-12-28")} // Set the minimum date to "12/27/2023"
+          minDate={new Date("2023-12-29")} // Set the minimum date to "12/27/2023"
           maxDate={maxDate} // Set the maximum date to disable future dates
         />
         {loading ? (
           <LoadingScreen>Loading...</LoadingScreen>
         ) : error ? (
           <ErrorScreen>
-            <p>Oops, couldn't fetch haiku.</p>
+            <p>No haiku found for this date.</p>
           </ErrorScreen>
         ) : (
           <>
@@ -122,4 +121,4 @@ const HaikuComponent = () => {
   );
 };
 
-export default HaikuComponent;
+export default HaikuComponent; 
