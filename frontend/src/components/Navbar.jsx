@@ -1,0 +1,77 @@
+import React from "react";
+import styled from "styled-components";
+import colors from "../styles/_variables.scss";
+
+const NavbarContainer = styled.nav`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5); // Semi-transparent white
+  backdrop-filter: blur(5px);
+  padding: 0.5em 2em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px ${colors.shadowLight};
+
+  * {
+    transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+`;
+
+const Logo = styled.img`
+  height: 2em;
+  opacity: 0.65;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+`;
+
+const NavMenu = styled.div`
+  display: flex;
+  gap: 1em;
+`;
+
+const NavLink = styled.button`
+  background: none;
+  border: none;
+  color: ${colors.textSecondary};
+  font-size: 1em;
+  font-weight: bold;
+
+  &:hover {
+    color: ${colors.textAccent};
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+// Navbar Component
+const Navbar = () => {
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <NavbarContainer>
+      <Logo src="jf.png" alt="jf logo" />
+      <NavMenu>
+        <NavLink onClick={() => scrollToSection("section1")}>Section 1</NavLink>
+        <NavLink onClick={() => scrollToSection("section2")}>Section 2</NavLink>
+        <NavLink onClick={() => scrollToSection("section3")}>Section 3</NavLink>
+      </NavMenu>
+    </NavbarContainer>
+  );
+};
+
+export default Navbar;

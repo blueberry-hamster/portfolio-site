@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { gsap } from "gsap";
+import colors from "../styles/_variables.scss";
 
 const fadeInBounce = keyframes`
   0% {
     opacity: 0;
     transform: translateY(-4em);
-    filter: drop-shadow(0.1em 0.6em 1em rgba(62, 8, 36, 0.3));
+    filter: drop-shadow(0.1em 0.6em 1em ${colors.shadowLight});
   }
   10% {
     opacity: 0.1;
@@ -19,12 +20,12 @@ const fadeInBounce = keyframes`
   35% {
     opacity: 0.5;
     transform: translateY(2em);
-    filter: drop-shadow(0.1em 0em 0.05em rgba(62, 8, 36, 0.7));
+    filter: drop-shadow(0.1em 0em 0.05em ${colors.shadowDark});
   }
   99% {
     opacity: 1;
     transform: translateY(0em);
-    filter: drop-shadow(0.1em 0.2em 0.2em rgba(62, 8, 36, 0.65));
+    filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowMedium});
   }
 `;
 
@@ -47,7 +48,7 @@ const Header = styled.div`
   height: fit-content;
   display: flex;
   animation: ${fadeInBounce} 1.5s ease forwards;
-  filter: drop-shadow(0.1em 0.2em 0.2em rgba(62, 8, 36, 0.65));
+  filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowMedium});
 `;
 
 const Logo = styled.div`
@@ -67,7 +68,7 @@ const Logo = styled.div`
 
 
 const SubHeader = styled.div`
-  // color: white;
+  color: ${colors.white};
   font-size: 3em;
   padding: 0.5em;
   margin: auto;
@@ -134,7 +135,7 @@ const useHoverEffect = (ref) => {
           x: x * 0.4,
           y: y * 0.4,
           scale: 1.05,
-          filter: "drop-shadow(0.1em 0.7em 0.5em rgba(62, 8, 36, 0.45))",
+          filter: "drop-shadow(0.1em 1em 0.15em rgba(62, 8, 36, 0.25))",
           ease: "power2.out",
           duration: 0.4,
         });
@@ -144,7 +145,7 @@ const useHoverEffect = (ref) => {
           x: 0,
           y: 0,
           scale: 1,
-          filter: "drop-shadow(0.1em 0.2em 0.2em rgba(62, 8, 36, 0.65))",
+          filter: "drop-shadow(0.1em 0.2em 0.2em rgba(62, 8, 36, 0.5))",
           ease: "elastic.out(1.2, 0.4)",
           duration: 0.7,
         });

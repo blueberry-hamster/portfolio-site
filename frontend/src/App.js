@@ -1,16 +1,24 @@
-import './styles/App.scss';
-import React from 'react';
-import HaikuComponent from './components/Haiku';
-import Landing from './components/Landing';
+import React from "react";
+import styled from "styled-components";
+import Landing from "./components/Landing";
+import HaikuComponent from "./components/Haiku";
+import Navbar from "./components/Navbar";
+
+const Padding = styled.div`
+  height: 25vh;
+  background-color: white;
+`;
 
 function App() {
   return (
-    <div>
+    <>
+      <Navbar />
       <Landing />
+      <Padding />
       <HaikuComponent />
-    </div>
+      <Padding />
+    </>
   );
 }
 
 export default App;
-

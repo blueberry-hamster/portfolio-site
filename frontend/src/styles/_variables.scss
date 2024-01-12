@@ -1,11 +1,21 @@
 $text-primary: #1c1111;
 $text-secondary: #4d4848;
-$text-accent: #882f2f;
+$text-accent: #f04343;
 $white: #fff;
+
+// Shadow colors
+$shadow-light: rgba(62, 8, 36, 0.25);
+$shadow-medium: rgba(62, 8, 36, 0.5);
+$shadow: rgba(62, 8, 36, 0.65);
+$shadow-dark: rgba(62, 8, 36, 0.7);
 
 :export {
   textPrimary: $text-primary;
   textSecondary: $text-secondary;
   textAccent: $text-accent;
   white: $white;
+  shadowLight: $shadow-light;
+  shadowMedium: $shadow-medium;
+  shadow: $shadow;
+  shadowDark: $shadow-dark;
 }
