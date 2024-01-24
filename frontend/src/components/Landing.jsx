@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { gsap } from "gsap";
+import Draggable from "gsap/Draggable";
 import colors from "../styles/_variables.scss";
 
 const fadeInBounce = keyframes`
@@ -104,6 +105,11 @@ const Glass = styled.div`
   );
   mix-blend-mode: hard-light;
 `;
+
+// Check if the device is touch-enabled
+const isTouchDevice = () => {
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+};
 
 const useHoverEffect = (ref) => {
   const [hover, setHover] = useState(false);

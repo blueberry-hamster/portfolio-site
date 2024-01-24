@@ -1,7 +1,10 @@
 $text-primary: #1c1111;
-$text-secondary: #4d4848;
+$text-secondary: #696262;
 $text-accent: #f04343;
 $white: #fff;
+$light-grey: #e3dede;
+
+$link: #f8874f;
 
 // Shadow colors
 $shadow-light: rgba(62, 8, 36, 0.25);
@@ -14,6 +17,8 @@ $shadow-dark: rgba(62, 8, 36, 0.7);
   textSecondary: $text-secondary;
   textAccent: $text-accent;
   white: $white;
+  lightGrey: $light-grey;
+  link: $link;
   shadowLight: $shadow-light;
   shadowMedium: $shadow-medium;
   shadow: $shadow;

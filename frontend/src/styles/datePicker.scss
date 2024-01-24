@@ -1,27 +1,30 @@
-$hoverColor: #d33737;
-$light-grey: #e3dede;
+// datePicker.scss
+@import '../styles/variables';
 
 .react-datepicker {
-  border: 1px solid $light-grey;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  box-shadow: 0 0.3em 0.5em rgba(0, 0, 0, 0.1);
+  
 }
 
 .react-datepicker__triangle {
   ::before {
-    border-bottom-color: $light-grey;
+    border-bottom-color: none;
   }
 }
 
 .react-datepicker__input-container {
   input {
-    font-size: 20px;
+    font-size: 1.35em;
     font-weight: bold;
+    color: $text-secondary;
     text-align: center;
     border: none;
+    transition: color 0.3s ease-in-out;
 
     &:hover {
       cursor: pointer;
-      color: $hoverColor;
+      color: $text-accent;
     }
     &:focus-visible {
       outline: none;

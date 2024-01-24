@@ -6,7 +6,7 @@ const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.5); // Semi-transparent white
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
   padding: 0.5em 2em;
   position: fixed;
@@ -17,19 +17,46 @@ const NavbarContainer = styled.nav`
   box-shadow: 0 2px 5px ${colors.shadowLight};
 
   * {
-    transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 `;
 
-const Logo = styled.img`
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover .logo-text {
+    transform: translateX(0);
+    opacity: 1;
+    color: ${colors.textAccent};
+  }
+`;
+  
+  const Logo = styled.img`
   height: 2em;
   opacity: 0.65;
-
+  
   &:hover {
     opacity: 1;
-    cursor: pointer;
   }
-`;
+  `;
+  
+  const LogoText = styled.span`
+    font-weight: bold;
+    color: ${colors.textSecondary};
+    margin-left: 10px;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out,
+      color 1s ease-in-out; 
+
+    // Media query to hide text on narrow screens
+    @media (max-width: 600px) {
+      display: none;
+    }
+  `;
+
 
 const NavMenu = styled.div`
   display: flex;
@@ -64,11 +91,14 @@ const Navbar = () => {
 
   return (
     <NavbarContainer>
-      <Logo src="jf.png" alt="jf logo" />
+      <LogoContainer onClick={() => scrollToSection("section1")}>
+        <Logo src="jf.png" alt="jf logo" />
+        <LogoText className="logo-text">Jiani Fan</LogoText>
+      </LogoContainer>
       <NavMenu>
-        <NavLink onClick={() => scrollToSection("section1")}>Section 1</NavLink>
-        <NavLink onClick={() => scrollToSection("section2")}>Section 2</NavLink>
-        <NavLink onClick={() => scrollToSection("section3")}>Section 3</NavLink>
+        {/* <NavLink onClick={() => scrollToSection("section1")}>Section 1</NavLink> */}
+        <NavLink onClick={() => scrollToSection("section2")}>Daily Haiku</NavLink>
+        {/* <NavLink onClick={() => scrollToSection("section3")}>Section 3</NavLink> */}
       </NavMenu>
     </NavbarContainer>
   );

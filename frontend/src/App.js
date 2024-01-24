@@ -13,10 +13,15 @@ function App() {
   return (
     <>
       <Navbar />
-      <Landing />
+      <div id="section1">
+        <Landing />
+      </div>
       <Padding />
-      <HaikuComponent />
+      <div id="section2">
+        <HaikuComponent />
+      </div>
       <Padding />
+      {/* If you have more sections, continue adding them with their respective IDs */}
     </>
   );
 }

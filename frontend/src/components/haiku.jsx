@@ -3,7 +3,7 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import colors from "../styles/_variables.scss";
 import "react-datepicker/dist/react-datepicker.css";
-import "./datePicker.scss";
+import "../styles/datePicker.scss";
 
 const Container = styled.div`
   display: flex;
@@ -20,11 +20,10 @@ const Title = styled.h2`
 `;
 
 const HaikuCard = styled.div`
-  // border: 1px solid #e6e6e6;
   background-color: ${colors.white};
   padding: 1em;
   margin-top: 1.5em;
-  max-width: 35em;
+  max-width: 40em;
   text-align: center;
   filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
   border-radius: 0.6em;
@@ -40,9 +39,13 @@ const HaikuText = styled.div`
 `;
 
 const HaikuImage = styled.img`
-  max-width: 100%;
-  height: 55vh;
+  width: 100%; // Make the width fill the container
+  height: auto; // Set height to auto to maintain aspect ratio
+  aspect-ratio: 1 / 1; // Ensure the image is always square
+  object-fit: cover; // Cover the container fully without stretching
   border-radius: 0.6em;
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 const LoadingScreen = styled.div`
