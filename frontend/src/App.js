@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Landing from "./components/Landing";
 import HaikuComponent from "./components/Haiku";
 import Navbar from "./components/Navbar";
+import Timeline from "./components/Timeline";
 
 const Padding = styled.div`
   height: 25vh;
@@ -18,10 +19,14 @@ function App() {
       </div>
       <Padding />
       <div id="section2">
+        <Timeline />
+      </div>
+      <Padding />
+      <div id="section3">
         <HaikuComponent />
       </div>
       <Padding />
-      {/* If you have more sections, continue adding them with their respective IDs */}
+      
     </>
   );
 }

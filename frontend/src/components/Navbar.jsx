@@ -96,8 +96,8 @@ const Navbar = () => {
         <LogoText className="logo-text">Jiani Fan</LogoText>
       </LogoContainer>
       <NavMenu>
-        {/* <NavLink onClick={() => scrollToSection("section1")}>Section 1</NavLink> */}
-        <NavLink onClick={() => scrollToSection("section2")}>Daily Haiku</NavLink>
+        <NavLink onClick={() => scrollToSection("section2")}>Timelime</NavLink>
+        <NavLink onClick={() => scrollToSection("section3")}>Daily Haiku</NavLink>
         {/* <NavLink onClick={() => scrollToSection("section3")}>Section 3</NavLink> */}
       </NavMenu>
     </NavbarContainer>

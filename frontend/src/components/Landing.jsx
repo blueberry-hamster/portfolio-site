@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { gsap } from "gsap";
-import Draggable from "gsap/Draggable";
 import colors from "../styles/_variables.scss";
 
 const fadeInBounce = keyframes`
@@ -141,7 +140,7 @@ const useHoverEffect = (ref) => {
           x: x * 0.4,
           y: y * 0.4,
           scale: 1.05,
-          filter: "drop-shadow(0.1em 1em 0.15em rgba(62, 8, 36, 0.25))",
+          filter: "drop-shadow(0.1em 1em 0.2em rgba(62, 8, 36, 0.5))",
           ease: "power2.out",
           duration: 0.4,
         });
