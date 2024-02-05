@@ -4,7 +4,11 @@ import Landing from "./components/Landing";
 import HaikuComponent from "./components/Haiku";
 import Navbar from "./components/Navbar";
 import Timeline from "./components/Timeline";
+import DiamondComponent from "./components/Multifacited";
 
+const Page = styled.div`
+  overflow-x: hidden;
+`
 const Padding = styled.div`
   height: 25vh;
   background-color: white;
@@ -12,22 +16,26 @@ const Padding = styled.div`
 
 function App() {
   return (
-    <>
+    <Page>
       <Navbar />
-      <div id="section1">
+      <div id="landing">
         <Landing />
       </div>
       <Padding />
-      <div id="section2">
+      <div id="cube">
+        <DiamondComponent />
+      </div>
+      <Padding />
+      <div id="timeline">
         <Timeline />
       </div>
       <Padding />
-      <div id="section3">
+      <div id="haiku">
         <HaikuComponent />
       </div>
       <Padding />
       
-    </>
+    </ Page>
   );
 }
 

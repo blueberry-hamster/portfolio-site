@@ -91,14 +91,14 @@ const Navbar = () => {
 
   return (
     <NavbarContainer>
-      <LogoContainer onClick={() => scrollToSection("section1")}>
+      <LogoContainer onClick={() => scrollToSection("landing")}>
         <Logo src="jf.png" alt="jf logo" />
         <LogoText className="logo-text">Jiani Fan</LogoText>
       </LogoContainer>
       <NavMenu>
-        <NavLink onClick={() => scrollToSection("section2")}>Timelime</NavLink>
-        <NavLink onClick={() => scrollToSection("section3")}>Daily Haiku</NavLink>
-        {/* <NavLink onClick={() => scrollToSection("section3")}>Section 3</NavLink> */}
+        <NavLink onClick={() => scrollToSection("cube")}>About</NavLink>
+        <NavLink onClick={() => scrollToSection("timeline")}>Timelime</NavLink>
+        <NavLink onClick={() => scrollToSection("haiku")}>Daily Haiku</NavLink>
       </NavMenu>
     </NavbarContainer>
   );

@@ -5,11 +5,8 @@ import colors from "../styles/_variables.scss";
 
 const TimelineContainer = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
+  margin: 0 auto;
   box-sizing: border-box;
 
   * {
@@ -29,6 +26,8 @@ const TimelineContainer = styled.div`
     );
     top: 0;
     bottom: 0;
+    left: 50%;
+    margin-left: 0.125em;
   }
 `;
 
@@ -42,7 +41,6 @@ const TimelineContent = styled.div`
   padding: 1.25em 1.875em;
   background-color: white;
   position: relative;
-  left: -55.5%;
   border-radius: 0.375em;
   filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
 
@@ -62,21 +60,21 @@ const TimelineContent = styled.div`
 const TimelineItem = styled.div`
   padding: 0.625em 2.5em;
   position: relative;
-  background-color: inherit;
-  width: 45%;
+  width: 50%;
+  box-sizing: border-box;
   z-index: 2;
 
   &:hover {
-    cursor: pointer;
+    // cursor: pointer;
     filter: drop-shadow(0.2em 0.7em 0.6em ${colors.shadowLight});
   }
 
   &:nth-child(odd) {
-    left: 0;
+    left: 0%;
 
     &:after {
-      left: 47.3%;
-      margin-left: 0.125em;
+      right: -1.25em;
+      margin-left: -2em / 2; // Half the circle width to align the circle with the middle line
     }
 
     ${TimelineContent}::after {
@@ -90,8 +88,8 @@ const TimelineItem = styled.div`
     left: 50%;
 
     &:after {
-      right: 145.4%;
-      margin-right: 0.125em;
+      left: -0.75em;
+      margin-right: 5%;
     }
 
     ${TimelineContent}::after {
@@ -103,18 +101,20 @@ const TimelineItem = styled.div`
     }
   }
 
-  &:after { // the circles
+  &:after {
+    // the circles
     content: "";
     position: absolute;
-    width: 1.5625em;
-    height: 1.5625em;
+    width: 1.5em;
+    height: 1.5em;
+    top: 46%;
+    right: -0.75em;
     background-color: white;
     background-image: url(redRecord.jpg);
     background-size: cover;
     background-attachment: fixed;
     border: 0.25em solid ${colors.textAccent};
     filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
-    top: 43%;
     border-radius: 50%;
     z-index: 1;
   }
