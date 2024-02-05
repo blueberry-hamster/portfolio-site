@@ -3,6 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import colors from "../styles/_variables.scss";
 
+const mobileBreakpoint = "768px"; // Define a variable for the mobile breakpoint
+
 const TimelineContainer = styled.div`
   position: relative;
   min-height: 100vh;
@@ -34,8 +36,12 @@ const TimelineContainer = styled.div`
 const TimelineHeader = styled.h1`
   padding-left: 5em;
   padding-top: 1.5em;
-  width: 100vw
-`
+  width: 100vw;
+
+  @media screen and (max-width: ${mobileBreakpoint}) {
+    padding-left: 1em;
+  }
+`;
 
 const TimelineContent = styled.div`
   padding: 1.25em 1.875em;
@@ -64,6 +70,10 @@ const TimelineItem = styled.div`
   box-sizing: border-box;
   z-index: 2;
 
+  @media screen and (max-width: ${mobileBreakpoint}) {
+    width: 100%;
+  }
+
   &:hover {
     // cursor: pointer;
     filter: drop-shadow(0.2em 0.7em 0.6em ${colors.shadowLight});
@@ -81,11 +91,18 @@ const TimelineItem = styled.div`
       left: 100%;
       margin-left: 0;
       border-color: transparent transparent transparent white;
+      @media screen and (max-width: ${mobileBreakpoint}) {
+        display: none;
+      }
     }
   }
 
   &:nth-child(even) {
     left: 50%;
+
+    @media screen and (max-width: ${mobileBreakpoint}) {
+      left: 0%;
+    }
 
     &:after {
       left: -0.75em;
@@ -98,41 +115,42 @@ const TimelineItem = styled.div`
       margin-left: 0;
       margin-right: 0;
       border-color: transparent white transparent transparent;
+
+      @media screen and (max-width: ${mobileBreakpoint}) {
+        display: none;
+      }
     }
   }
 
-  &:after {
-    // the circles
-    content: "";
-    position: absolute;
-    width: 1.5em;
-    height: 1.5em;
-    top: 46%;
-    right: -0.75em;
-    background-color: white;
-    background-image: url(redRecord.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-    border: 0.25em solid ${colors.textAccent};
-    filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
-    border-radius: 50%;
-    z-index: 1;
+  @media screen and (min-width: ${mobileBreakpoint}) {
+    &:after {
+      // the circles
+      content: "";
+      position: absolute;
+      width: 1.5em;
+      height: 1.5em;
+      top: 46%;
+      right: -0.75em;
+      background-color: white;
+      background-image: url(redRecord.jpg);
+      background-size: cover;
+      background-attachment: fixed;
+      border: 0.25em solid ${colors.textAccent};
+      filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
+      border-radius: 50%;
+      z-index: 1;
+    }
   }
 `;
-
-
 
 const Timeline = () => {
   return (
     <TimelineContainer>
-      <TimelineHeader>
-        Timeline
-      </TimelineHeader>
+      <TimelineHeader>Timeline</TimelineHeader>
       <TimelineItem>
         <TimelineContent>
           <h2>2010 - 2014</h2>
-          <h3>UC Berkeley: BS Environmental Science
-          </h3>
+          <h3>UC Berkeley: BS Environmental Science</h3>
           <p>Your text here</p>
         </TimelineContent>
       </TimelineItem>
