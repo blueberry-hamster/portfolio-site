@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import colors from "../styles/_variables.scss";
 
-const mobileBreakpoint = "768px"; // Define a variable for the mobile breakpoint
+const mobileBreakpoint = "750px"; // Define a variable for the mobile breakpoint
 
 const TimelineContainer = styled.div`
   position: relative;

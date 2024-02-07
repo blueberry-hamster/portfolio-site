@@ -4,7 +4,7 @@ import Landing from "./components/Landing";
 import HaikuComponent from "./components/Haiku";
 import Navbar from "./components/Navbar";
 import Timeline from "./components/Timeline";
-import DiamondComponent from "./components/Multifacited";
+import Multifacited from "./components/Multifacited";
 
 const Page = styled.div`
   overflow-x: hidden;
@@ -23,7 +23,7 @@ function App() {
       </div>
       <Padding />
       <div id="cube">
-        <DiamondComponent />
+        <Multifacited />
       </div>
       <Padding />
       <div id="timeline">
