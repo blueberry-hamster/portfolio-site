@@ -1,11 +1,11 @@
 @import 'variables.scss';
 
-$color1: rgba(157, 80, 80, 0.679);
-$color2: rgba(196, 153, 153, 0.796);
-$color3: rgba(203, 142, 142, 0.07);
-$color4: rgba(164, 92, 92, 0.637);
-$color5: rgba(196, 125, 125, 0.414);
-$color6: rgba(131, 72, 72, 0.877);
+$color1: rgba(188, 16, 16, 0.679);
+$color2: rgba(209, 28, 28, 0.796);
+$color3: rgba(236, 109, 109, 0.07);
+$color4: rgba(234, 46, 46, 0.637);
+$color5: rgba(237, 114, 114, 0.414);
+$color6: rgba(155, 10, 10, 0.877);
 
 .top,
 .diamond-slice-a,
@@ -14,13 +14,18 @@ $color6: rgba(131, 72, 72, 0.877);
 }
 
 .diamond {
-  filter: brightness(1.5);
+  filter: brightness(1);
   margin-top: 30vh;
   width: 70vh;
   height: 70vh;
   max-width: 70vw;
   max-height: 70vw;
-  perspective: 600vh;
+  perspective: 600vh; 
+
+  &:hover {
+    transition: all 3s ease-in-out;
+    filter: brightness(1.35);
+  }
 }
 
 .diamond__base {
@@ -29,6 +34,8 @@ $color6: rgba(131, 72, 72, 0.877);
   width: 100%;
   transform-style: preserve-3d;
   animation: linear ROTATE 25s infinite;
+  background: radial-gradient(circle, rgba(234, 46, 46, 0.519) 0%, rgba(255, 50, 50, 0.2) 10%, transparent 50%);
+  border-radius: 100%;
 }
 
 .diamond-slice {

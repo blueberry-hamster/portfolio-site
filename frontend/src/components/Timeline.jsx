@@ -50,7 +50,7 @@ const TimelineContent = styled.div`
   border-radius: 0.375em;
   filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
 
-  &::after {
+  &:after {
     content: "";
     position: absolute;
     width: 0;
@@ -75,7 +75,6 @@ const TimelineItem = styled.div`
   }
 
   &:hover {
-    // cursor: pointer;
     filter: drop-shadow(0.2em 0.7em 0.6em ${colors.shadowLight});
   }
 
