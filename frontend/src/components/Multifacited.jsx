@@ -1,13 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState} from "react";
 import styled from "styled-components";
 import RedDiamond from "./Diamond";
-import colors from "../styles/_variables.scss";
+import FlipCard from "./FlipCard"; 
 
 const Section = styled.div`
   width: 100vw;
   min-height: 100vh;
   box-sizing: border-box;
-  padding: 2em;
+  padding: 2em 4em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,40 +19,56 @@ const Section = styled.div`
 const Title = styled.h1`
   text-align: center;
   width: 100%;
+  margin-top: 15%;
 `;
 const Content = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  postition: relative;
+  box-sizing: border-box;
+  margin: 0em 4em;
+  padding-top: 10em;
 `;
-const LeftTags = styled.div`
+const TagsSection = styled.div`
+  display: flex;
   flex-direction: column;
 `;
-const RightTags = styled.div`
-  flex-direction: column;
-`;
-const Tag = styled.div`
-  width: fit-content;
-  font-size: 1.2em;
-  font-weight: bold;
-  padding: 1.25em 1.875em;
-  margin-bottom: 2em;
-  background-color: white;
-  position: relative;
-  border-radius: 0.375em;
-  filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
+const LeftTags = styled(TagsSection)`
 
-  &:hover {
-    filter: drop-shadow(0.2em 0.7em 0.6em ${colors.shadowLight});
-  }
+`;
+const RightTags = styled(TagsSection)`
+  align-items: end;
 `;
 
 const Multifacited = () => {
+
   const tags = [
-    { id: "creativity", content: "Creativity", position: "left" },
-    { id: "design", content: "Design", position: "left" },
-    { id: "full-stack", content: "Full-stack", position: "right" },
-    { id: "collaborative", content: "Collaborative", position: "right" },
+    {
+      id: "creativity",
+      title: "Creativity",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      position: "left",
+    },
+    {
+      id: "design",
+      title: "Design",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      position: "left",
+    },
+    {
+      id: "full-stack",
+      title: "Full-stack",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      position: "right",
+    },
+    {
+      id: "collaborative",
+      title: "Collaborative",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      position: "right",
+    },
   ];
 
   return (
@@ -62,22 +78,24 @@ const Multifacited = () => {
         <LeftTags>
           {tags
             .filter((tag) => tag.position === "left")
-            .map((tag, index) => (
-              <Tag key={tag.id} >
-                {tag.content}
-              </Tag>
+            .map((tag) => (
+              <FlipCard
+                key={tag.id}
+                frontContent={tag.title}
+                backContent={tag.description}
+              />
             ))}
         </LeftTags>
         <RedDiamond />
         <RightTags>
           {tags
             .filter((tag) => tag.position === "right")
-            .map((tag, index) => (
-              <Tag
+            .map((tag) => (
+              <FlipCard
                 key={tag.id}
-              >
-                {tag.content}
-              </Tag>
+                frontContent={tag.title}
+                backContent={tag.description}
+              />
             ))}
         </RightTags>
       </Content>

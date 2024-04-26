@@ -29,27 +29,22 @@ const LogoContainer = styled.div`
   &:hover .logo-text {
     transform: translateX(0);
     opacity: 1;
-    color: ${colors.textAccent};
+    color: ${colors.textAccent2};
   }
 `;
   
   const Logo = styled.img`
   height: 2em;
-  opacity: 0.65;
-  
-  &:hover {
-    opacity: 1;
-  }
   `;
   
   const LogoText = styled.span`
     font-weight: bold;
-    color: ${colors.textSecondary};
+    color: ${colors.textAccent};
     margin-left: 10px;
     opacity: 0;
     transform: translateX(100%);
     transition: transform 0.3s ease-out, opacity 0.3s ease-out,
-      color 1s ease-in-out; 
+      color 1s ease-in-out;
 
     // Media query to hide text on narrow screens
     @media (max-width: 600px) {

@@ -1,15 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect} from "react";
 import "../styles/diamond.scss";
 
 const RedDiamond = () => {
-  // Ref to the container
-  const containerRef = useRef(null);
 
   useEffect(() => {
   }, []); // Empty dependency array means this effect runs once after initial render
 
   return (
-    <div ref={containerRef} className="diamond intro">
+    <div className="diamond intro">
       <div className="diamond__base">
         <div className="diamond-bottom">
           {[...Array(8)].map((_, i) => (
