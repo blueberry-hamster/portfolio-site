@@ -41,8 +41,6 @@ const Content = styled.div`
     justify-content: center; // Helps maintain layout integrity
     padding-top: 10%;
   }
-  /* border: 2px solid red; // Temporary border to locate the element
-  background-color: rgba(255, 0, 0, 0.1); // Temporary background */
 `;
 const TagsSection = styled.div`
   display: flex;
@@ -52,8 +50,6 @@ const TagsSection = styled.div`
     align-items: center;
     box-sizing: border-box;
   }
-  /* border: 2px solid red; // Temporary border to locate the element
-  background-color: rgba(255, 0, 0, 0.1); // Temporary background */
 `;
 const LeftTags = styled(TagsSection)`
   flex: 1 1 20%; // Allows shrinking and growing but with limits
@@ -100,32 +96,36 @@ const Multifacited = () => {
 
   const isMobile = windowWidth < pageBreak;
   
-  const tags = [
-    {
-      id: "creativity",
-      title: "Creativity",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      position: "left",
-    },
-    {
-      id: "design",
-      title: "Design",
-      description: "UI/UX for webapps$ 2D digital asset creation",
-      position: "left",
-    },
-    {
-      id: "full-stack",
-      title: "Full-stack",
-      description: "Web, JS, Python$ React, Ruby on Rails, NodeJS$ SQL MongoDB Postgres",
-      position: "right",
-    },
-    {
-      id: "collaborative",
-      title: "Collaborative",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      position: "right",
-    },
-  ];
+ const tags = [
+   {
+     id: "full-stack",
+     title: "Full-stack",
+     description:
+       "HTML, CSS, JS, Python, Ruby $React, Ruby on Rails, Node.js $SQL, MongoDB, Postgres",
+     position: "left",
+   },
+   {
+     id: "collaboration",
+     title: "Collaboration",
+     description:
+       "Works well in groups $Leadership experience $Cross-department communication",
+     position: "left",
+   },
+   {
+     id: "design",
+     title: "Design",
+     description:
+       "UI/UX for webapps $2D digital asset creation $Figma, Sketch, Adobe Photoshop, Illustrator",
+     position: "right",
+   },
+   {
+     id: "creativity",
+     title: "Creativity",
+     description:
+       "Novel product solutions $Creative improvements in efficiency $Diverse background",
+     position: "right",
+   },
+ ];
 
   const MobileLayout = () => {
     return (

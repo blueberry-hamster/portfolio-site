@@ -12,8 +12,6 @@ const CardContainer = styled.div`
   padding: 1em;
   perspective: 80em;
   margin-bottom: 2em;
-  box-sizing: border-box;
-  box-sizing: border-box;
 
   @media (max-width: 1000px) {
     margin-bottom: 0em;
@@ -32,7 +30,7 @@ const Card = styled.div`
   transform: ${({ isActive }) =>
     isActive ? "rotateY(180deg)" : "rotateY(0deg)"};
   transform-origin: center center;
-`;
+  `;
 
 const Face = styled.div`
   position: absolute;
@@ -53,6 +51,7 @@ const Face = styled.div`
 
   @media (max-width: 1000px) {
     height: auto;
+    margin-bottom: 1em;
   }
 `;
 
@@ -82,20 +81,36 @@ const Front = styled(Face)`
 `;
 
 const Back = styled(Face)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   color: ${colors.textPrimary};
   transform: rotateY(180deg);
-  padding: 2em 1em;
+  padding: 1em 1em;
   font-size: medium;
+  p {
+    margin: 0.25em 0; // Adds vertical spacing between paragraphs
+  }
 `;
+
+const processDescription = (description) => {
+  return description.split("$");
+};
 
 const FlipCard = ({ frontContent, backContent }) => {
   const [isActive, setIsActive] = useState(false);
+  
+  const processedBackContent = processDescription(backContent);
 
   return (
     <CardContainer onClick={() => setIsActive(!isActive)}>
       <Card isActive={isActive}>
         <Front>{frontContent}</Front>
-        <Back>{backContent}</Back>
+        <Back>
+          {processedBackContent.map((line, index) => (
+            <p key={index}>{line}</p>
+          ))}
+        </Back>
       </Card>
     </CardContainer>
   );
