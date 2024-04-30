@@ -15,8 +15,14 @@ const Container = styled.div`
   background-color: ${colors.white};
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
   margin: 2em 0em 0.5em 0em;
+  text-align: center;
+  p:first-child {
+    margin-bottom: -1em;
+    font-weight: 400;
+    font-size: 0.8em;
+  }
 `;
 
 const HaikuCard = styled.div`
@@ -32,6 +38,7 @@ const HaikuCard = styled.div`
 const HaikuText = styled.div`
   font-size: 1em;
   margin: 1.5em;
+  text-align: center;
 
   & p {
     margin-bottom: -0.6em;
@@ -98,7 +105,10 @@ const HaikuComponent = () => {
 
   return (
     <Container>
-      <Title>Daily Haiku</Title>
+      <Title>
+        <p>AI Generated</p>
+        <p>Daily Haiku</p>
+      </Title>
       <DatePicker
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}

@@ -91,9 +91,11 @@ const Navbar = () => {
         <LogoText className="logo-text">Portfolio</LogoText>
       </LogoContainer>
       <NavMenu>
+        <NavLink onClick={() => scrollToSection("landing")}>JF</NavLink>
         <NavLink onClick={() => scrollToSection("cube")}>About</NavLink>
         <NavLink onClick={() => scrollToSection("timeline")}>Timelime</NavLink>
-        <NavLink onClick={() => scrollToSection("haiku")}>Daily Haiku</NavLink>
+        <NavLink onClick={() => scrollToSection("haiku")}>Projects</NavLink>
+        <NavLink onClick={() => scrollToSection("contact")}>Contact</NavLink>
       </NavMenu>
     </NavbarContainer>
   );

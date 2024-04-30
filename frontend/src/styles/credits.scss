@@ -1,0 +1,54 @@
+/* Credits.scss */
+@import 'variables';
+
+.credits-container {
+  position: relative;
+  height: 60vh;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.animation-container {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  z-index: 1;
+}
+
+.animation-container span {
+  position: absolute;
+  color: $text-accent;
+  text-shadow: 0 0 1px white;
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  pointer-events: none;
+  cursor: default;
+  z-index: 1;
+  opacity: 0;
+  top: 0;
+  will-change: transform, opacity;
+  animation-timing-function: ease-out;
+  animation-name: move;
+}
+
+@keyframes move {
+  0% {
+    opacity: 0.75;
+    top: 100%;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}

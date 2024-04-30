@@ -21,9 +21,14 @@ const Section = styled.div`
   }
 `;
 const Title = styled.h1`
-  text-align: center;
-  width: 100%;
+  text-align: left;
+  width: fit-content;
   margin-top: 15%;
+  p:first-child {
+    margin-bottom: -1em;
+    font-weight: 400;
+    font-size: 0.8em;
+  }
 `;
 const Content = styled.div`
   position: relative;
@@ -31,7 +36,7 @@ const Content = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding-top: 18%;
+  padding-top: 10%;
   box-sizing: border-box;
   justify-content: center;
 
@@ -181,7 +186,10 @@ const Multifacited = () => {
 
   return (
     <Section>
-      <Title>Multifacited</Title>
+      <Title>
+        <p>Uniquely</p>
+        <p>Multifaceted</p>
+      </Title>
       {isMobile ? <MobileLayout /> : <DesktopLayout />}
     </Section>
   );

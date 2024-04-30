@@ -37,6 +37,11 @@ const TimelineHeader = styled.h1`
   padding-left: 5em;
   padding-top: 1.5em;
   width: 100vw;
+  p:first-child {
+    margin-bottom: -1em;
+    font-weight: 400;
+    font-size: 0.8em;
+  }
 
   @media screen and (max-width: ${mobileBreakpoint}) {
     padding-left: 1em;
@@ -145,7 +150,10 @@ const TimelineItem = styled.div`
 const Timeline = () => {
   return (
     <TimelineContainer>
-      <TimelineHeader>Timeline</TimelineHeader>
+      <TimelineHeader>
+        <p>Work</p>
+        <p>Timeline</p>
+      </TimelineHeader>
       <TimelineItem>
         <TimelineContent>
           <h2>2010 - 2014</h2>
@@ -185,6 +193,13 @@ const Timeline = () => {
         <TimelineContent>
           <h2>2019 - 2023</h2>
           <h3>Riviera Partners: Software Engineer</h3>
+          <p>Your text here</p>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineContent>
+          <h2>2024</h2>
+          <h3>New Possibilities</h3>
           <p>Your text here</p>
         </TimelineContent>
       </TimelineItem>

@@ -52,6 +52,7 @@ const Face = styled.div`
   @media (max-width: 1000px) {
     height: auto;
     margin-bottom: 1em;
+    padding: 2em 1em;
   }
 `;
 
@@ -84,12 +85,20 @@ const Back = styled(Face)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  font-weight: 400;
   color: ${colors.textPrimary};
   transform: rotateY(180deg);
-  padding: 1em 1em;
+  /* padding: 0.5em 2em; */
   font-size: medium;
-  p {
-    margin: 0.25em 0; // Adds vertical spacing between paragraphs
+  li {
+    margin: 0.25em 0 0.35em -1em; // Adds vertical spacing between paragraphs
+    list-style-type: disc; // Applies bullet points
+    padding-left: 1em; // Adds indentation for bullets
+  }
+  @media (max-width: 1000px) {
+    /* height: auto; */
+    margin-bottom: 1em;
+    padding: 0.1em 1em;
   }
 `;
 
@@ -107,9 +116,11 @@ const FlipCard = ({ frontContent, backContent }) => {
       <Card isActive={isActive}>
         <Front>{frontContent}</Front>
         <Back>
-          {processedBackContent.map((line, index) => (
-            <p key={index}>{line}</p>
-          ))}
+          <ul>
+            {processedBackContent.map((line, index) => (
+              <li key={index}>{line}</li>
+            ))}
+          </ul>
         </Back>
       </Card>
     </CardContainer>

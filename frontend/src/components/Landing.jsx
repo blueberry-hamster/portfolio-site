@@ -30,24 +30,27 @@ const fadeInBounce = keyframes`
 `;
 
 const Body = styled.div`
+  position: relative;
   background-image: url(redMacro.jpg);
   background-size: cover;
   background-attachment: fixed;
-  box-sizing: border-box;
   height: 100vh;
-  padding: 10em;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
+  box-sizing: border-box;
 `;
 
 const Header = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-top: 5em;
   height: fit-content;
   display: flex;
-  animation: ${fadeInBounce} 1.5s ease forwards;
+  animation: ${fadeInBounce} 1s ease forwards;
   filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowMedium});
 `;
 
@@ -67,13 +70,17 @@ const Logo = styled.div`
 `;
 
 
-const SubHeader = styled.div`
+const HeaderText = styled.h1`
   color: ${colors.white};
-  font-size: 3em;
-  width: max-content;
-  padding: 0.5em;
-  margin: auto;
-  /* letter-spacing: 0.13em; */
+  font-size: 2.5em;
+  text-align: center;
+  margin-top: -0.5em;
+  p:nth-child(2) {
+    letter-spacing: 0.17em;
+    margin-top: -1.2em;
+    font-weight: 400;
+    font-size: 0.8em;
+  }
 `;
 
 const Glass = styled.div`
@@ -104,6 +111,8 @@ const Glass = styled.div`
     rgba(0, 0, 0, 1) 100%
   );
   mix-blend-mode: hard-light;
+  overflow: hidden;
+  box-sizing: border-box;
 `;
 
 const useHoverEffect = (ref) => {
@@ -172,11 +181,13 @@ const Landing = () => {
 
   return (
     <Body>
-      <Glass />
+      {/* <Glass /> */}
       <Header ref={headerRef}>
         <Logo />
-        <SubHeader>Jiani Fan</SubHeader>
-        {/* <SubHeader>Portfolio</SubHeader> */}
+        <HeaderText>
+          <p>Jiani Fan</p>
+          <p>Portfolio</p>
+        </HeaderText>
       </Header>
     </Body>
   );
