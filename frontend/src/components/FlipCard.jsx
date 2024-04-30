@@ -4,16 +4,20 @@ import colors from "../styles/_variables.scss";
 
 const CardContainer = styled.div`
   position: relative;
-  min-width: 15em;
-  min-height: 8em;
-  padding: 1em;
-  perspective: 1000px;
-  margin-bottom: 3em;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 15em;
+  min-height: 8em;
+  padding: 1em;
+  perspective: 80em;
+  margin-bottom: 2em;
   box-sizing: border-box;
+  box-sizing: border-box;
+
+  @media (max-width: 1000px) {
+    margin-bottom: 0em;
+  }
 `;
 
 const Card = styled.div`
@@ -32,12 +36,13 @@ const Card = styled.div`
 
 const Face = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  backface-visibility: hidden;
   border-radius: 0.375em;
   font-size: 1.2em;
   font-weight: bold;
@@ -45,6 +50,10 @@ const Face = styled.div`
   background-color: white;
   filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
   overflow: hidden;
+
+  @media (max-width: 1000px) {
+    height: auto;
+  }
 `;
 
 const Front = styled(Face)`
@@ -75,10 +84,8 @@ const Front = styled(Face)`
 const Back = styled(Face)`
   color: ${colors.textPrimary};
   transform: rotateY(180deg);
-  padding: 1em;
-  &:hover {
-    // color: ${colors.textAccent}
-  }
+  padding: 2em 1em;
+  font-size: medium;
 `;
 
 const FlipCard = ({ frontContent, backContent }) => {
