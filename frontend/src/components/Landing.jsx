@@ -70,9 +70,10 @@ const Logo = styled.div`
 const SubHeader = styled.div`
   color: ${colors.white};
   font-size: 3em;
+  width: max-content;
   padding: 0.5em;
   margin: auto;
-  letter-spacing: 0.13em;
+  /* letter-spacing: 0.13em; */
 `;
 
 const Glass = styled.div`
@@ -174,7 +175,8 @@ const Landing = () => {
       <Glass />
       <Header ref={headerRef}>
         <Logo />
-        <SubHeader>Portfolio</SubHeader>
+        <SubHeader>Jiani Fan</SubHeader>
+        {/* <SubHeader>Portfolio</SubHeader> */}
       </Header>
     </Body>
   );

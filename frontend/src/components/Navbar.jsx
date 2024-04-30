@@ -88,7 +88,7 @@ const Navbar = () => {
     <NavbarContainer>
       <LogoContainer onClick={() => scrollToSection("landing")}>
         <Logo src="jf.png" alt="jf logo" />
-        <LogoText className="logo-text">Jiani Fan</LogoText>
+        <LogoText className="logo-text">Portfolio</LogoText>
       </LogoContainer>
       <NavMenu>
         <NavLink onClick={() => scrollToSection("cube")}>About</NavLink>
