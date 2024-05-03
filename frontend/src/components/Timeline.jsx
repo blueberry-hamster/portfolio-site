@@ -51,6 +51,7 @@ const TimelineHeader = styled.h1`
 const TimelineContent = styled.div`
   position: relative;
   padding: 1.25em 1.875em;
+  width: 100%;
   max-width: 35em;
   background-color: white;
   border-radius: 0.375em;
@@ -72,6 +73,7 @@ const TimelineContent = styled.div`
 const TimelineItem = styled.div`
   position: relative;
   display: flex;
+  line-height: 1.4em;
   width: 50%;
   padding: 0.625em 2.5em;
   box-sizing: border-box;
@@ -154,39 +156,47 @@ const timelineEntries = [
   {
     period: "2010 - 2014",
     title: "UC Berkeley: BS Environmental Science",
-    description: "Your text here",
+    description:
+      "I earned a Bachelor of Science in Environmental Science from UC Berkeley, developing a solid foundation in analytical thinking and problem-solving. My major focused on understanding complex systems and leveraging data to make informed decisions. Additionally, I explored computer science fundamentals in my final year, sparking my interest in software. Engaging in various group projects and interdisciplinary studies, I honed my collaborative skills, preparing me for diverse professional settings. Go Bears! 🐻",
   },
   {
     period: "2014 - 2015",
     title: "Hungr.ly: UI/UX Designer",
-    description: "Your text here",
+    description:
+      "At Hungr.ly, I embraced a versatile role that spanned all aspects of design. From capturing enticing photos at local eateries to crafting high-fidelity mockups, I touched every part of the creative process. My collaboration with engineers ensured our designs were transformed into functional features, and my deep dive into user research kept our app aligned with user needs. Additionally, I shaped Hungr.ly's branding, adapting swiftly and focusing keenly on details to pick up new skills rapidly.",
   },
   {
     period: "2016",
     title: "PPC: Product Designer",
-    description: "Your text here",
+    description:
+      "At PPC, I spearheaded the development of a new line of 3D flower card kits, designed for customers to grow real flowers. I managed everything from conceptual design to packaging prototyping, ensuring our creations were both aesthetically pleasing and manufacturable. This role demanded quick adaptation and robust problem-solving as we continually refined our products to enhance user satisfaction.",
   },
   {
     period: "2016 - 2018",
     title: "Truffle Pig: Content Creator",
-    description: "Your text here",
+    description:
+      "Working at Truffle Pig, a social media advertising agency, I crafted ads primarily for Snapchat. My clientele ranged from television shows to luxury brands, each requiring a unique advertising approach that reflected their brand identity. Utilizing my graphic design and illustration expertise, I produced engaging ads and innovative Snapchat filters, managing varying campaign cadences and consistently delivering under tight deadlines.",
   },
   {
     period: "2019",
     title: "App Academy: Fullstack Bootcamp",
-    description: "Your text here",
+    description:
+      "I graduated from App Academy’s intensive Fullstack Bootcamp, mastering JavaScript, Ruby on Rails, and React. This rigorous program sharpened my abilities across both front-end and back-end development, equipping me with the skills necessary to undertake comprehensive web development projects confidently.",
   },
   {
     period: "2019 - 2023",
     title: "Riviera Partners: Software Engineer",
-    description: "Your text here",
+    description:
+      "At Riviera Partners, renowned for its executive recruiting in the tech sector, I significantly contributed to refining our proprietary software that leverages advanced machine learning to streamline recruitment. My focus was primarily on front-end development using React, Styled Components, and Tailwind, supported by a Ruby on Rails backend.<br/><br/>Throughout my tenure, I played an important role in two major product overhauls, necessitating quick learning and application of new technologies. As a leader within the front-end team, I facilitated effective communication between developers, product managers, designers, and data scientists.<br/><br/>Beyond routine tasks, I initiated enhancements to improve our platform comprehensively, showing proactive leadership. I also engaged directly with SQL, broadening my technical repertoire. Organizing virtual social events, I also helped cultivate a collaborative team atmosphere.",
   },
   {
     period: "2024",
     title: "New Possibilities",
-    description: "Your text here",
+    description:
+      "I am eager to explore new opportunities where I can apply my web development experience and passion for crafting beautiful, user-centered solutions. I look forward to discussing how I can contribute to your team’s success!",
   },
 ];
+
 
 const Timeline = () => {
   return (
@@ -200,7 +210,7 @@ const Timeline = () => {
           <TimelineContent>
             <h2>{entry.period}</h2>
             <h3>{entry.title}</h3>
-            <p>{entry.description}</p>
+            <p dangerouslySetInnerHTML={{ __html: entry.description }}/>
           </TimelineContent>
         </TimelineItem>
       ))}

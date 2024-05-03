@@ -30,7 +30,7 @@ const Card = styled.div`
   transform: ${({ isActive }) =>
     isActive ? "rotateY(180deg)" : "rotateY(0deg)"};
   transform-origin: center center;
-  `;
+`;
 
 const Face = styled.div`
   position: absolute;
@@ -46,8 +46,12 @@ const Face = styled.div`
   font-weight: bold;
   color: ${colors.textPrimary};
   background-color: ${colors.white};
+  transition: all 0.3s ease-in-out; // Combined transitions for clarity
   filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
   overflow: hidden;
+  &:hover {
+    filter: drop-shadow(0.2em 0.7em 0.6em ${colors.shadowLight});
+  }
 
   @media (max-width: 1000px) {
     height: auto;
@@ -57,8 +61,6 @@ const Face = styled.div`
 `;
 
 const Front = styled(Face)`
-  transition: color 0.5s ease-in-out, opacity 0.5s ease-in-out; // Combined transitions for clarity
-
   &::before {
     content: "";
     position: absolute;
@@ -108,7 +110,7 @@ const processDescription = (description) => {
 
 const FlipCard = ({ frontContent, backContent }) => {
   const [isActive, setIsActive] = useState(false);
-  
+
   const processedBackContent = processDescription(backContent);
 
   return (
