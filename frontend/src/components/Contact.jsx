@@ -46,8 +46,8 @@ const ErrorMessage = styled.div`
 `;
 
 const TextContainer = styled.div`
-  min-width: 60vw;
-  max-width: 20em;
+  width: 60vw;
+  max-width: 45em;
   margin-top: 1em;
   padding: 3em;
   background-color: ${colors.white};

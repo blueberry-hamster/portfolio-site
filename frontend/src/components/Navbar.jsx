@@ -164,11 +164,16 @@ const Navbar = () => {
           <HamburgerIcon />
 
           <DropdownMenu show={menuVisible}>
-            <DropdownItem onClick={() => scrollToSection("cube")}>About</DropdownItem>
+            <DropdownItem onClick={() => scrollToSection("landing")}>Home</DropdownItem>
+            <DropdownItem onClick={() => scrollToSection("cube")}>
+              About
+            </DropdownItem>
             <DropdownItem onClick={() => scrollToSection("timeline")}>
               Timeline
             </DropdownItem>
-            <DropdownItem onClick={() => scrollToSection("haiku")}>Projects</DropdownItem>
+            <DropdownItem onClick={() => scrollToSection("haiku")}>
+              Projects
+            </DropdownItem>
             <DropdownItem onClick={() => scrollToSection("contact")}>
               Contact
             </DropdownItem>

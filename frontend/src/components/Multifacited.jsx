@@ -23,7 +23,7 @@ const Section = styled.div`
 const Title = styled.h1`
   text-align: left;
   width: fit-content;
-  margin-top: 15%;
+  margin-top: 10%;
   p:first-child {
     margin-bottom: -1em;
     font-weight: 400;
@@ -34,7 +34,6 @@ const Content = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   width: 100%;
   padding-top: 10%;
   box-sizing: border-box;
@@ -57,18 +56,20 @@ const TagsSection = styled.div`
   }
 `;
 const LeftTags = styled(TagsSection)`
-  flex: 1 1 20%; // Allows shrinking and growing but with limits
+  flex: 1 1 25%; // Allows shrinking and growing but with limits
+  align-items: flex-end;
 `;
 const RightTags = styled(TagsSection)`
-  flex: 1 1 20%; // Same as LeftTags
+  flex: 1 1 25%; // Same as LeftTags
   align-items: end;
+  align-items: flex-start;
 `;
 const AllTags = styled(TagsSection)`
   width: 100%;
 `
 const DiamondWrapper = styled.div`
   display: flex;
-  flex: 0 1 60%; // Takes the remaining space but can shrink if necessary
+  flex: 0 1 50%; // Takes the remaining space but can shrink if necessary
   max-width: 100%; // Ensure it does not exceed the content width
   height: 100%;
   justify-content: center;

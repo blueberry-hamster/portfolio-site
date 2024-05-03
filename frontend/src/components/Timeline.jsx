@@ -49,9 +49,10 @@ const TimelineHeader = styled.h1`
 `;
 
 const TimelineContent = styled.div`
-  padding: 1.25em 1.875em;
-  background-color: white;
   position: relative;
+  padding: 1.25em 1.875em;
+  max-width: 35em;
+  background-color: white;
   border-radius: 0.375em;
   filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
 
@@ -69,9 +70,10 @@ const TimelineContent = styled.div`
 `;
 
 const TimelineItem = styled.div`
-  padding: 0.625em 2.5em;
   position: relative;
+  display: flex;
   width: 50%;
+  padding: 0.625em 2.5em;
   box-sizing: border-box;
   z-index: 2;
 
@@ -85,6 +87,7 @@ const TimelineItem = styled.div`
 
   &:nth-child(odd) {
     left: 0%;
+    justify-content: flex-end;
 
     &:after {
       right: -1.25em;
@@ -147,6 +150,44 @@ const TimelineItem = styled.div`
   }
 `;
 
+const timelineEntries = [
+  {
+    period: "2010 - 2014",
+    title: "UC Berkeley: BS Environmental Science",
+    description: "Your text here",
+  },
+  {
+    period: "2014 - 2015",
+    title: "Hungr.ly: UI/UX Designer",
+    description: "Your text here",
+  },
+  {
+    period: "2016",
+    title: "PPC: Product Designer",
+    description: "Your text here",
+  },
+  {
+    period: "2016 - 2018",
+    title: "Truffle Pig: Content Creator",
+    description: "Your text here",
+  },
+  {
+    period: "2019",
+    title: "App Academy: Fullstack Bootcamp",
+    description: "Your text here",
+  },
+  {
+    period: "2019 - 2023",
+    title: "Riviera Partners: Software Engineer",
+    description: "Your text here",
+  },
+  {
+    period: "2024",
+    title: "New Possibilities",
+    description: "Your text here",
+  },
+];
+
 const Timeline = () => {
   return (
     <TimelineContainer>
@@ -154,57 +195,18 @@ const Timeline = () => {
         <p>Work</p>
         <p>Timeline</p>
       </TimelineHeader>
-      <TimelineItem>
-        <TimelineContent>
-          <h2>2010 - 2014</h2>
-          <h3>UC Berkeley: BS Environmental Science</h3>
-          <p>Your text here</p>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineContent>
-          <h2>2014 - 2015</h2>
-          <h3>Hungr.ly: UI/UX Designer</h3>
-          <p>Your text here</p>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineContent>
-          <h2>2016</h2>
-          <h3>PPC: Product Designer</h3>
-          <p>Your text here</p>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineContent>
-          <h2>2016 - 2018</h2>
-          <h3>Truffle Pig: Content Creator</h3>
-          <p>Your text here</p>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineContent>
-          <h2>2019</h2>
-          <h3>App Academy: Fullstack Bootcamp</h3>
-          <p>Your text here</p>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineContent>
-          <h2>2019 - 2023</h2>
-          <h3>Riviera Partners: Software Engineer</h3>
-          <p>Your text here</p>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineContent>
-          <h2>2024</h2>
-          <h3>New Possibilities</h3>
-          <p>Your text here</p>
-        </TimelineContent>
-      </TimelineItem>
+      {timelineEntries.map((entry, index) => (
+        <TimelineItem key={index}>
+          <TimelineContent>
+            <h2>{entry.period}</h2>
+            <h3>{entry.title}</h3>
+            <p>{entry.description}</p>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
     </TimelineContainer>
   );
 };
 
 export default Timeline;
+
