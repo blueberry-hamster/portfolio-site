@@ -45,7 +45,7 @@ const Face = styled.div`
   font-size: 1.2em;
   font-weight: bold;
   color: ${colors.textPrimary};
-  background-color: white;
+  background-color: ${colors.white};
   filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
   overflow: hidden;
 

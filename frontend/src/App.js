@@ -5,12 +5,17 @@ import HaikuComponent from "./components/Haiku";
 import Navbar from "./components/Navbar";
 import Timeline from "./components/Timeline";
 import Multifacited from "./components/Multifacited";
+import ContactMe from "./components/Contact";
 import Credits from "./components/Credits";
 
 const Page = styled.div`
   overflow-x: hidden;
   box-sizing: border-box;
 `
+const PaddingL = styled.div`
+  height: 25vh;
+  background-color: white;
+`;
 const PaddingM = styled.div`
   height: 15vh;
   background-color: white;
@@ -39,7 +44,10 @@ function App() {
       <div id="haiku">
         <HaikuComponent />
       </div>
-      <PaddingS />
+      <PaddingL />    
+        <div id="contact">
+          <ContactMe />
+        </div>
       <div id="credits">
         <Credits />
       </div>

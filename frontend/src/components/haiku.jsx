@@ -11,6 +11,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
+  width: 100vw;
   box-sizing: border-box;
   background-color: ${colors.white};
 `;
@@ -29,7 +30,7 @@ const HaikuCard = styled.div`
   background-color: ${colors.white};
   padding: 1em;
   margin-top: 1.5em;
-  max-width: 40em;
+  max-width: 35em;
   text-align: center;
   filter: drop-shadow(0.1em 0.2em 0.2em ${colors.shadowLight});
   border-radius: 0.6em;
@@ -62,14 +63,21 @@ const LoadingScreen = styled.div`
 `;
 
 const ErrorScreen = styled.div`
-  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  min-width: 20vw;
+  min-height: 20vw;
+  max-width: 40em;
+  max-height: 40em;
   color: ${colors.textAccent};
   text-align: center;
 `;
 
 const HaikuComponent = () => {
   const [haikuData, setHaikuData] = useState({
-    date: new Date().toLocaleDateString(), // Provide a default value in desired format
+    date: new useState(new Date().toLocaleString("en-US", { timeZone: "UTC" })), // Provide a default value in desired format
     haiku: "loading haiku",
     image: "",
   });
@@ -113,7 +121,7 @@ const HaikuComponent = () => {
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}
         shouldCloseOnSelect={true}
-        minDate={new Date("2023-12-29")} // Set the minimum date to "12/27/2023"
+        minDate={new Date("2023-12-29")} 
         maxDate={maxDate} // Set the maximum date to disable future dates
       />
       <HaikuCard>
@@ -121,7 +129,7 @@ const HaikuComponent = () => {
           <LoadingScreen>Loading...</LoadingScreen>
         ) : error ? (
           <ErrorScreen>
-            <p>No haiku found for this date.</p>
+            <p>No haiku found for this date. <br/> Please select a different date.</p>
           </ErrorScreen>
         ) : (
           <>
