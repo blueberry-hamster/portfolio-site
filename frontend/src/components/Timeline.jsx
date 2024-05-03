@@ -203,14 +203,14 @@ const Timeline = () => {
     <TimelineContainer>
       <TimelineHeader>
         <p>Work</p>
-        <p>Timeline</p>
+        <p>Timeline 🌱</p>
       </TimelineHeader>
       {timelineEntries.map((entry, index) => (
         <TimelineItem key={index}>
           <TimelineContent>
             <h2>{entry.period}</h2>
             <h3>{entry.title}</h3>
-            <p dangerouslySetInnerHTML={{ __html: entry.description }}/>
+            <p dangerouslySetInnerHTML={{ __html: entry.description }} />
           </TimelineContent>
         </TimelineItem>
       ))}

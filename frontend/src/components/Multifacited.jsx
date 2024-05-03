@@ -107,31 +107,32 @@ const Multifacited = () => {
      id: "full-stack",
      title: "Full-stack",
      description:
-       "HTML, CSS, JS, Python, Ruby $React, Ruby on Rails, Node.js $SQL, MongoDB, Postgres",
+       "HTML, CSS, JavaScript, Python, Ruby $React, Ruby on Rails, Node.js $SQL, MongoDB, Postgres",
      position: "left",
    },
    {
      id: "collaboration",
      title: "Collaboration",
      description:
-       "Works well in groups $Leadership experience $Cross-department communication",
+       "Effective in team settings $Experienced in leadership roles $Strong interpersonal communication",
      position: "left",
    },
    {
      id: "design",
      title: "Design",
      description:
-       "UI/UX for webapps $2D digital asset creation $Figma, Sketch, Adobe Photoshop, Illustrator",
+       "UI/UX for web applications $creating 2D digital assets $Figma, Sketch, Adobe Photoshop, Illustrator",
      position: "right",
    },
    {
-     id: "creativity",
-     title: "Creativity",
+     id: "adaptability",
+     title: "Adaptability",
      description:
-       "Novel product solutions $Creative improvements in efficiency $Diverse background",
+       "Thrives in dynamic environments $Versatile skill set across multiple disciplines $Rapidly assimilates new technologies",
      position: "right",
    },
  ];
+
 
   const MobileLayout = () => {
     return (

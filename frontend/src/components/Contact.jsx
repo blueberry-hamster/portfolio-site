@@ -131,7 +131,7 @@ const ContactMe = () => {
   return (
     <ContactContainer>
       <Title>
-        <p>Contact Me</p>
+        <p>Contact Me 👋</p>
         <p>contactme@jianifan.com</p>
       </Title>
       <TextContainer>
