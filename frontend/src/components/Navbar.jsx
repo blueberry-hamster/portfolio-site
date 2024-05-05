@@ -91,12 +91,14 @@ const DropdownMenu = styled.div`
   display: ${({ show }) => (show ? "flex" : "none")};
   flex-direction: column;
   align-items: flex-start;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
   box-shadow: 0 2px 5px ${colors.shadowLight};
   border-radius: 0.375em;
   position: absolute;
-  top: 2.5em; // Adjusts position below the hamburger icon
-  right: 2em;
+  top: 3em; // Adjusts position below the hamburger icon
+  right: 1.7em;
+  z-index: 1000;
 `;
 
 const DropdownItem = styled.button`
@@ -149,8 +151,8 @@ const Navbar = () => {
 
       {windowWidth >= 900 ? (
         <NavMenu>
-          <NavLink onClick={() => scrollToSection("landing")}>JF</NavLink>
-          <NavLink onClick={() => scrollToSection("cube")}>About</NavLink>
+          <NavLink onClick={() => scrollToSection("about-me")}>About</NavLink>
+          <NavLink onClick={() => scrollToSection("multifaceted")}>Multifaceted</NavLink>
           <NavLink onClick={() => scrollToSection("timeline")}>
             Timeline
           </NavLink>
@@ -165,8 +167,11 @@ const Navbar = () => {
 
           <DropdownMenu show={menuVisible}>
             <DropdownItem onClick={() => scrollToSection("landing")}>Home</DropdownItem>
-            <DropdownItem onClick={() => scrollToSection("cube")}>
-              About
+            <DropdownItem onClick={() => scrollToSection("about-me")}>
+              About Me
+            </DropdownItem>
+            <DropdownItem onClick={() => scrollToSection("multifaceted")}>
+              Multifaceted
             </DropdownItem>
             <DropdownItem onClick={() => scrollToSection("timeline")}>
               Timeline

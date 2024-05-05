@@ -3,8 +3,9 @@ import styled from "styled-components";
 import Landing from "./components/Landing";
 import HaikuComponent from "./components/Haiku";
 import Navbar from "./components/Navbar";
+import AboutMe from"./components/About";
 import Timeline from "./components/Timeline";
-import Multifacited from "./components/Multifacited";
+import Multifacited from "./components/Multifaceted";
 import ContactMe from "./components/Contact";
 import Credits from "./components/Credits";
 
@@ -32,15 +33,18 @@ function App() {
       <div id="landing">
         <Landing />
       </div>
-      <PaddingS />
-      <div id="cube">
+      <div id="about-me">
+        <AboutMe />
+      </div>
+        {/* <PaddingS />        */}
+      <div id="multifaceted">
         <Multifacited />
       </div>
       <PaddingS />
       <div id="timeline">
         <Timeline />
       </div>
-      <PaddingM />
+      <PaddingS />
       <div id="haiku">
         <HaikuComponent />
       </div>

@@ -39,8 +39,9 @@ const Body = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-x: hidden;
+  overflow: hidden;
   box-sizing: border-box;
+  z-index: 1;
 `;
 
 const Header = styled.div`
@@ -72,47 +73,35 @@ const Logo = styled.div`
 
 const HeaderText = styled.h1`
   color: ${colors.white};
-  font-size: 2.5em;
+  font-size: 2.6em;
   text-align: center;
   margin-top: -0.5em;
   p:nth-child(2) {
-    letter-spacing: 0.17em;
-    margin-top: -1.2em;
+    font-size: 0.7em;
+    letter-spacing: 0.25em;
+    margin-top: -1.4em;
     font-weight: 400;
-    font-size: 0.8em;
   }
 `;
 
 const Glass = styled.div`
   position: absolute;
   width: 100vw;
-  height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.1) 60%,
-    rgba(255, 255, 255, 0.4) 70%,
-    rgba(255, 255, 255, 0.7) 85%,
-    rgba(255, 255, 255, 1) 100%
-  );
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.1) 60%,
-    rgba(0, 0, 0, 0.4) 70%,
-    rgba(0, 0, 0, 0.7) 85%,
-    rgba(0, 0, 0, 1) 100%
-  );
+  height: 220vh;
+  top: 0;
+  background-color: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(5px);
   mask-image: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.1) 60%,
-    rgba(0, 0, 0, 0.4) 70%,
-    rgba(0, 0, 0, 0.7) 85%,
-    rgba(0, 0, 0, 1) 100%
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0.1) 35%,
+    rgba(0, 0, 0, 0.4) 40%,
+    rgba(0, 0, 0, 0.7) 45%,
+    rgba(0, 0, 0, 1) 48%
   );
-  mix-blend-mode: hard-light;
   overflow: hidden;
   box-sizing: border-box;
+  z-index: 2;
 `;
 
 const useHoverEffect = (ref) => {
@@ -177,15 +166,30 @@ const useHoverEffect = (ref) => {
 
 const Landing = () => {
   const headerRef = useRef(null);
+  const glassRef = useRef(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      const { current } = glassRef;
+      if (current) {
+        const scrollMultiplier = -1.07;
+        const offset = window.scrollY * scrollMultiplier;
+        current.style.transform = `translateY(${offset}px)`;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  
   useHoverEffect(headerRef);
 
   return (
     <Body>
-      {/* <Glass /> */}
+      <Glass ref={glassRef} />
       <Header ref={headerRef}>
         <Logo />
         <HeaderText>
-          <p>Jiani Fan</p>
+          <p>Jenny Fan</p>
           <p>Portfolio</p>
         </HeaderText>
       </Header>

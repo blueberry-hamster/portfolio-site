@@ -86,7 +86,7 @@ const DiamondWrapper = styled.div`
   }
 `;
 
-const Multifacited = () => {
+const Multifaceted = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -197,4 +197,4 @@ const Multifacited = () => {
   );
 };
 
-export default Multifacited;
+export default Multifaceted;

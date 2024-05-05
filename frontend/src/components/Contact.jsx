@@ -79,6 +79,9 @@ const TextArea = styled.textarea`
   &:focus {
     outline: none; // Remove the focus outline
   }
+  @media (max-width: ${pageBreak + "px"}) {
+    box-shadow: none;
+  }
 `;
 
 const Button = styled.button`

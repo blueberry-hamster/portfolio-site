@@ -87,7 +87,6 @@ const Back = styled(Face)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-weight: 400;
   color: ${colors.textPrimary};
   transform: rotateY(180deg);
   /* padding: 0.5em 2em; */
@@ -117,7 +116,7 @@ const FlipCard = ({ frontContent, backContent }) => {
     <CardContainer onClick={() => setIsActive(!isActive)}>
       <Card isActive={isActive}>
         <Front>{frontContent}</Front>
-        <Back>
+        <Back className={"serif"}>
           <ul>
             {processedBackContent.map((line, index) => (
               <li key={index}>{line}</li>
