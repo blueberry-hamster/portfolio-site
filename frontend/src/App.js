@@ -3,16 +3,24 @@ import styled from "styled-components";
 import Landing from "./components/Landing";
 import HaikuComponent from "./components/Haiku";
 import Navbar from "./components/Navbar";
-import AboutMe from"./components/About";
+import AboutMe from "./components/About";
 import Timeline from "./components/Timeline";
-import Multifacited from "./components/Multifaceted";
+import Multifaceted from "./components/Multifaceted";
 import ContactMe from "./components/Contact";
 import Credits from "./components/Credits";
 
 const Page = styled.div`
   overflow-x: hidden;
+  overflow-y: scroll; // Ensure the container allows scrolling
+  scroll-snap-type: y proximity; // Enable vertical snapping with a relaxed behavior
   box-sizing: border-box;
-`
+  height: 100vh; // This will make the page container fill the viewport
+`;
+
+const Section = styled.div`
+  scroll-snap-align: start; // Aligns the top of the section with the top of the viewport
+`;
+
 const PaddingL = styled.div`
   height: 25vh;
   background-color: white;
@@ -30,32 +38,33 @@ function App() {
   return (
     <Page>
       <Navbar />
-      <div id="landing">
+      <Section id="landing">
         <Landing />
-      </div>
-      <div id="about-me">
+      </Section>
+      <PaddingM />
+      <Section id="about-me">
         <AboutMe />
-      </div>
-        {/* <PaddingS />        */}
-      <div id="multifaceted">
-        <Multifacited />
-      </div>
+      </Section>
       <PaddingS />
-      <div id="timeline">
+      <Section id="multifaceted">
+        <Multifaceted />
+      </Section>
+      <PaddingS />
+      <Section id="timeline">
         <Timeline />
-      </div>
+      </Section>
       <PaddingS />
-      <div id="haiku">
+      <Section id="haiku">
         <HaikuComponent />
-      </div>
-      <PaddingL />    
-        <div id="contact">
-          <ContactMe />
-        </div>
-      <div id="credits">
+      </Section>
+      <PaddingL />
+      <Section id="contact">
+        <ContactMe />
+      </Section>
+      <Section id="credits">
         <Credits />
-      </div>
-    </ Page>
+      </Section>
+    </Page>
   );
 }
 

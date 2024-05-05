@@ -127,8 +127,14 @@ const ContactMe = () => {
       subject
     )}&body=${body}`;
 
-    // Redirect to the "mailto:" link
-    window.location.href = mailtoLink;
+    // Create a temporary anchor element and simulate a click to open in new tab
+    const tempLink = document.createElement("a");
+    tempLink.href = mailtoLink;
+    tempLink.target = "_blank";
+    tempLink.rel = "noopener noreferrer";
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
   };
 
   return (

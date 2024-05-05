@@ -5,6 +5,9 @@ import colors from "../styles/_variables.scss";
 import linkedinIcon from "../assets/linkedin.svg"; 
 import githubIcon from "../assets/github.svg"; 
 import resumeIcon from "../assets/resume.png"
+import avatar from "../assets/meavatar.png";
+
+const pageBreak = "900";
 
 const AboutContainer = styled.div`
   position: relative;
@@ -24,15 +27,34 @@ const Title = styled.h1`
     font-weight: 400;
     font-size: 0.8em;
   }
+
+  @media (max-width: ${pageBreak + "px"}) {
+    margin-bottom: -0.5em;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 
   p {
-    max-width: 35em;
+    max-width: 30em;
+  }
+
+  img {
+    width: 20em;
+    filter: brightness(1.15) saturate(1.3);
+  }
+
+  @media (max-width: ${pageBreak + "px"}) {
+    flex-direction: column;
+
+    img {
+      width: 15em;
+    }
   }
 `;
 
@@ -41,6 +63,10 @@ const LinksContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 20px; // Space between icons
+
+  @media (max-width: ${pageBreak + "px"}) {
+    margin-top: 0;
+  }
 `;
 
 const SocialIcon = styled.img`
@@ -63,9 +89,10 @@ const AboutMe = () => {
       </Title>
       <Content>
         <p className="serif">
-          Hello, I'm Jenny! I specialize in frontend development and have a good
-          handle on backend technologies too. I'm passionate about crafting
-          streamlined, engaging user experiences and functional designs.
+          Hello, I'm Jiani (Jenny)! I specialize in frontend development and
+          have a good handle on backend technologies, too. I'm passionate about
+          crafting streamlined, engaging user experiences and functional
+          designs.
           <br />
           <br />
           Outside of work, I love exploring local farmer's markets and
@@ -73,15 +100,34 @@ const AboutMe = () => {
           a sense of my work, and let's chat about opportunities for me to join
           your team!
         </p>
+        <img
+          src={avatar}
+          alt="Jiani avatar"
+        />
       </Content>
       <LinksContainer>
-        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" title="GitHub">
+        <a
+          href="https://github.com/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="GitHub"
+        >
           <SocialIcon src={githubIcon} alt="GitHub" />
         </a>
-        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+        <a
+          href="https://linkedin.com/in/yourusername"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="LinkedIn"
+        >
           <SocialIcon src={linkedinIcon} alt="LinkedIn" />
         </a>
-        <a href="your-resume-link" target="_blank" rel="noopener noreferrer" title="Resume">
+        <a
+          href="your-resume-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Resume"
+        >
           <SocialIcon src={resumeIcon} alt="Resume" />
         </a>
       </LinksContainer>

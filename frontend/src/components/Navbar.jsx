@@ -156,7 +156,7 @@ const Navbar = () => {
           <NavLink onClick={() => scrollToSection("timeline")}>
             Timeline
           </NavLink>
-          <NavLink onClick={() => scrollToSection("haiku")}>Projects</NavLink>
+          <NavLink onClick={() => scrollToSection("haiku")}>Haikus</NavLink>
           <NavLink onClick={() => scrollToSection("contact")}>Contact</NavLink>
         </NavMenu>
       ) : (
@@ -177,7 +177,7 @@ const Navbar = () => {
               Timeline
             </DropdownItem>
             <DropdownItem onClick={() => scrollToSection("haiku")}>
-              Projects
+              Haikus
             </DropdownItem>
             <DropdownItem onClick={() => scrollToSection("contact")}>
               Contact

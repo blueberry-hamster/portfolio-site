@@ -212,7 +212,7 @@ const Timeline = () => {
           <TimelineContent>
             <h2>{entry.period}</h2>
             <h3>{entry.title}</h3>
-            <p className="serif" dangerouslySetInnerHTML={{ __html: entry.description }} />
+            <p className="serif-lite" dangerouslySetInnerHTML={{ __html: entry.description }} />
           </TimelineContent>
         </TimelineItem>
       ))}

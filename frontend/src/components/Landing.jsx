@@ -189,7 +189,7 @@ const Landing = () => {
       <Header ref={headerRef}>
         <Logo />
         <HeaderText>
-          <p>Jenny Fan</p>
+          <p>Jiani Fan</p>
           <p>Portfolio</p>
         </HeaderText>
       </Header>

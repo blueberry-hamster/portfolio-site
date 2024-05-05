@@ -3,7 +3,7 @@ import styled from "styled-components";
 import RedDiamond from "./Diamond";
 import FlipCard from "./FlipCard"; 
 
-const pageBreak = "1000"
+const pageBreak = "900"
 
 const Section = styled.div`
   width: 100vw;
