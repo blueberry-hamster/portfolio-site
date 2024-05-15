@@ -107,7 +107,7 @@ const Multifaceted = () => {
      id: "full-stack",
      title: "Full-stack",
      description:
-       "HTML, CSS, JavaScript, Python, Ruby $React, Ruby on Rails, Node.js $SQL, MongoDB, Postgres",
+       "HTML, CSS, JavaScript, Python, Ruby $React + Redux, Ruby on Rails, Node.js $SQL, MongoDB, Postgres",
      position: "left",
    },
    {

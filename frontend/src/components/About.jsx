@@ -100,14 +100,11 @@ const AboutMe = () => {
           a sense of my work, and let's chat about opportunities for me to join
           your team!
         </p>
-        <img
-          src={avatar}
-          alt="Jiani avatar"
-        />
+        <img src={avatar} alt="Jiani avatar" />
       </Content>
       <LinksContainer>
         <a
-          href="https://github.com/yourusername"
+          href="https://github.com/blueberry-hamster"
           target="_blank"
           rel="noopener noreferrer"
           title="GitHub"
@@ -115,7 +112,7 @@ const AboutMe = () => {
           <SocialIcon src={githubIcon} alt="GitHub" />
         </a>
         <a
-          href="https://linkedin.com/in/yourusername"
+          href="https://www.linkedin.com/in/jiani-fan-38b11096/"
           target="_blank"
           rel="noopener noreferrer"
           title="LinkedIn"
@@ -123,7 +120,7 @@ const AboutMe = () => {
           <SocialIcon src={linkedinIcon} alt="LinkedIn" />
         </a>
         <a
-          href="your-resume-link"
+          href="https://docs.google.com/document/d/1z-wYnrEx1-lPmTEoEKhYZ5FlTAc-OuAuPKawBVdWqHY/edit?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           title="Resume"

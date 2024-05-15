@@ -12,9 +12,9 @@ import Credits from "./components/Credits";
 const Page = styled.div`
   overflow-x: hidden;
   overflow-y: scroll; // Ensure the container allows scrolling
-  scroll-snap-type: y proximity; // Enable vertical snapping with a relaxed behavior
+  /* scroll-snap-type: y proximity; // Enable vertical snapping with a relaxed behavior */
   box-sizing: border-box;
-  height: 100vh; // This will make the page container fill the viewport
+  /* height: 100vh; // This will make the page container fill the viewport */
 `;
 
 const Section = styled.div`
