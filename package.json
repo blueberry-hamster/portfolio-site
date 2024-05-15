@@ -1,0 +1,16 @@
+{
+  "name": "portfolio-website",
+  "version": "0.1.0",
+  "engines": {
+    "node": "14.x"
+  },
+  "scripts": {
+    "start": "node backend/haiku-backend/index.js",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "cors": "^2.8.5",
+    "path": "^0.12.7"
+  }
+}
