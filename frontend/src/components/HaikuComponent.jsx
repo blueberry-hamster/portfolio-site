@@ -75,7 +75,7 @@ const ErrorScreen = styled.div`
   text-align: center;
 `;
 
-const Haiku = () => {
+const HaikuComponent = () => {
   const [haikuData, setHaikuData] = useState({
     date: new useState(new Date().toLocaleString("en-US", { timeZone: "UTC" })), // Provide a default value in desired format
     haiku: "loading haiku",
@@ -146,4 +146,4 @@ const Haiku = () => {
   );
 };
 
-export default Haiku;
+export default HaikuComponent;
