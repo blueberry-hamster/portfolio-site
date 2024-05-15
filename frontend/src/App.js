@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Landing from "./components/Landing";
-import HaikuComponent from "./components/Haiku";
+import Haiku from "./components/Haiku";
 import Navbar from "./components/Navbar";
 import AboutMe from "./components/About";
 import Timeline from "./components/Timeline";
@@ -55,7 +55,7 @@ function App() {
       </Section>
       <PaddingS />
       <Section id="haiku">
-        <HaikuComponent />
+        <Haiku />
       </Section>
       <PaddingL />
       <Section id="contact">
