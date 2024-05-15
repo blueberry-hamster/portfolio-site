@@ -74,15 +74,20 @@ router.get('/carousel', async (req, res) => {
 router.get('/:date', async (req, res) => {
   try {
     const { date } = req.params;
+    const startOfDay = new Date(date);
+    startOfDay.setHours(0, 0, 0, 0); // Set the time to midnight (00:00:00:000)
+    const endOfDay = new Date(date);
+    endOfDay.setHours(23, 59, 59, 999); // Set the time to 23:59:59:999 (end of the day)
 
     // Assuming the date format is 'YYYY-MM-DD'
     const haikuData = await Haiku.findOne({
       where: {
         createdAt: {
-          [Op.gte]: new Date(date), // Greater than or equal to the start of the date
-          [Op.lt]: new Date(new Date(date).getTime() + 24 * 60 * 60 * 1000), // Less than the start of the next day
+          [Op.gte]: startOfDay,
+          [Op.lt]: endOfDay,
         },
       },
+      order: [['createdAt', 'DESC']],
     });
 
     // Format each haiku and return as an array

@@ -19,5 +19,5 @@ app.use('/haikus', haikuController);
 midnightJob;
 
 app.listen(backendPort, () => {
-  console.log(`Server is running on port ${backendPort}`);
+  console.log(`Server is running on port ${backendPort} :)`);
 });

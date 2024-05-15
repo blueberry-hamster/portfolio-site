@@ -1,43 +1,50 @@
-const OpenAI = require('openai');
-require('dotenv').config();
+const OpenAI = require("openai");
+require("dotenv").config();
+const { getRandomHaikuTheme } = require("./haikuThemes"); // Make sure the path is correct
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const generateHaiku = async () => {
-  const prompt = "Generate an elegant haiku about a natural landscape. Make sure to use a bit of alliteration, but do not repeat words or similar words. Double check that all the lines are cohesive in painting the picture of a single landscape. Make sure the poem makes sense. You are a famous master poet who  who takes their work very seriously but sometimes notices the whimsical little details in a landscape that adds life and character to their haikus.";
+  // Get a random theme for the haiku
+  const theme = getRandomHaikuTheme();
+  console.log("Theme: ${theme}");
+
+  // Adjusted prompt to include the theme
+  const prompt = `Create a haiku that captures the essence of "${theme}". The haiku should evoke emotions and have the power to stir and move people’s soul. Use vivid and powerful words, yet ensure they are gentle and balanced. Write with grace.`;
 
   try {
     const completion = await openai.chat.completions.create({
       messages: [
-        { role: 'system', content: 'You are a masterful poet.' },
-        { role: 'user', content: prompt },
+        {
+          role: "system",
+          content: "You are a masterful poet skilled in creating haikus.",
+        },
+        { role: "user", content: prompt },
       ],
-      model: 'gpt-3.5-turbo',
+      model: "gpt-4",
     });
 
-    return completion.choices[0].message.content.replace(/\n/g, '<br />');
-
+    return completion.choices[0].message.content.replace(/\n/g, "<br />");
   } catch (error) {
-    console.error('Error generating haiku:', error);
+    console.error("Error generating haiku:", error);
     throw error;
   }
 };
 
 const generateImage = async (haikuText) => {
-  const prompt = `Generate a minimalistic elegant beautiful peaceful traditional classic historical asian watercolor wet look. It should look museum quality. You are a master painter. Make sure it evokes the imagery, mood, and color scheme of this beautiful landscape: ${haikuText} not cartoony not funny not modern not digital not sharp not svg no inkspots pure landscape`;
+  const prompt = `Paint a traditional minimal elegant beautiful awe-inspiring captivating peaceful classic historical asian oriental watercolor wet translucent look. It should look museum quality. Make sure it evokes the imagery, mood, and color scheme of this beautiful scene: ${haikuText} not cartoony not funny not modern not digital not sharp not blocky no inkspots pure landscape`;
 
   try {
     const response = await openai.images.generate({
-      model: 'dall-e-3',
+      model: "dall-e-3",
       prompt: prompt,
     });
 
     return response.data[0].url;
-
   } catch (error) {
-    console.error('Error generating image:', error);
+    console.error("Error generating image:", error);
     throw error;
   }
 };
