@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const haikuController = require("./controllers/haikuController");
-const midnightJob = require("./utils/scheduler");
+const { midnightJob, generateMissingHaikusJob } = require("./utils/scheduler");
 const cors = require("cors");
 
 const app = express();
@@ -26,6 +26,7 @@ app.get("*", (req, res) => {
 
 // Use the scheduled job
 midnightJob;
+generateMissingHaikusJob;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT} :)`);

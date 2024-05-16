@@ -1,42 +1,80 @@
-const { generateHaiku, generateImage } = require('../services/openAIHaikuService');
-const schedule = require('node-schedule');
-const Haiku = require('../models/haikuModel');
-const { downloadImageFromUrl } = require('./imgDownloader');
+const {
+  generateHaiku,
+  generateImage,
+} = require("../services/openAIHaikuService");
+const schedule = require("node-schedule");
+const Haiku = require("../models/haikuModel");
+const { downloadImageFromUrl } = require("./imgDownloader");
+const { Op } = require("sequelize");
 
-
-// Function to run at midnight
-const generateHaikuAndImage = async () => {
+// Function to generate haiku and image and save to database
+const generateHaikuAndImage = async (date = new Date()) => {
   try {
-
-    // Generate the haiku
     const generatedHaiku = await generateHaiku();
-    console.log('Generated Haiku:', generatedHaiku);
+    console.log("Generated Haiku:", generatedHaiku);
 
-    // Generate the image using the haiku
     const generatedImage = await generateImage(generatedHaiku);
-    console.log('Generated Image:', generatedImage);
+    console.log("Generated Image:", generatedImage);
 
-    // Download the image with axios
     const transformedImageBuffer = await downloadImageFromUrl(generatedImage);
-    console.log('Transformed Image:', transformedImageBuffer);
+    console.log("Transformed Image:", transformedImageBuffer);
 
-    // Save the generated haiku and transformed image to the database using Sequelize
     const createdHaiku = await Haiku.create({
       haiku: generatedHaiku,
-      image: transformedImageBuffer, // Save the transformed image buffer
+      image: transformedImageBuffer,
+      createdAt: date, // Save with the specified date
+      updatedAt: date,
     });
-    console.log('Saved to DB:', createdHaiku.toJSON());
-
+    console.log("Saved to DB:", createdHaiku.toJSON());
   } catch (error) {
-    console.error('Error generating haiku and image:', error);
-    // Handle errors appropriately, e.g., retry or notify system admin
+    console.error("Error generating haiku and image:", error);
   }
 };
-generateHaikuAndImage()
 
 // Schedule the function to run at midnight
-const midnightJob = schedule.scheduleJob('0 0 * * *', () => {
-  generateHaikuAndImage();
-});
+const midnightJob = schedule.scheduleJob("0 0 * * *", generateHaikuAndImage);
 
-module.exports = midnightJob;
+// Function to generate haikus for missing dates
+const generateMissingHaikus = async () => {
+  try {
+    const today = new Date();
+    const startDate = new Date("2023-12-29");
+    let missingHaikusCount = 0;
+
+    for (
+      let d = new Date(today);
+      d >= startDate && missingHaikusCount < 3;
+      d.setDate(d.getDate() - 1)
+    ) {
+      const haiku = await Haiku.findOne({
+        where: {
+          createdAt: {
+            [Op.between]: [
+              new Date(d.setHours(0, 0, 0, 0)),
+              new Date(d.setHours(23, 59, 59, 999)),
+            ],
+          },
+        },
+      });
+
+      if (!haiku) {
+        await generateHaikuAndImage(new Date(d));
+        missingHaikusCount++;
+      }
+    }
+  } catch (error) {
+    console.error("Error generating missing haikus:", error);
+  }
+};
+
+// Schedule to run generateMissingHaikus every 5 days
+const generateMissingHaikusJob = schedule.scheduleJob(
+  "0 0 */10 * *",
+  generateMissingHaikus
+); // Runs every 10 days at midnight
+
+// Export functions and jobs
+module.exports = {
+  midnightJob,
+  generateMissingHaikusJob
+};
