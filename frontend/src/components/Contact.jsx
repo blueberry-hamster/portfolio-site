@@ -3,6 +3,7 @@ import styled from "styled-components";
 import colors from "../styles/_variables.scss";
 
 const pageBreak = "900";
+const pageBreakS = "750";
 
 // Styled components for the form elements
 const ContactContainer = styled.div`
@@ -23,6 +24,13 @@ const ContactContainer = styled.div`
 
   @media (max-width: ${pageBreak + "px"}) {
     padding: 2em 1em;
+  }
+
+  @media (max-width: ${pageBreakS + "px"}) {
+    padding: 1em 1em;
+    max-width: 100%;
+    width: 100vw;
+    /* margin: auto; */
   }
 `;
 
@@ -59,6 +67,11 @@ const TextContainer = styled.div`
     padding: 2em 1em;
     max-width: 95vw;
     margin: auto;
+  }
+  @media (max-width: ${pageBreakS + "px"}) {
+    padding: 1em 1em;
+    max-width: 100%;
+    width: 100vw;
   }
 `;
 
