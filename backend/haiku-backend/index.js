@@ -15,9 +15,16 @@ app.use((req, res, next) => {
   next();
 });
 
-const frontendOrigin = process.env.FRONTEND_ORIGIN || "http://localhost:3000"; // Use environment variable for frontend origin
-
-app.use(cors({ origin: frontendOrigin })); // Allow requests from the frontend origin
+// Update CORS to allow requests from jianifan.com
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://jianifan.com",
+      "https://www.jianifan.com",
+    ],
+  })
+);
 app.use(express.json());
 
 // Serve static files from the React app
