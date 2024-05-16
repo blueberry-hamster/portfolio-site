@@ -22,15 +22,15 @@ const Section = styled.div`
 `;
 
 const PaddingL = styled.div`
-  height: 25vh;
+  height: 15em;
   background-color: white;
 `;
 const PaddingM = styled.div`
-  height: 15vh;
+  height: 10em;
   background-color: white;
 `;
 const PaddingS = styled.div`
-  height: 10vh;
+  height: 6em;
   background-color: white;
 `;
 
@@ -41,7 +41,7 @@ function App() {
       <Section id="landing">
         <Landing />
       </Section>
-      <PaddingM />
+      <PaddingS />
       <Section id="about-me">
         <AboutMe />
       </Section>

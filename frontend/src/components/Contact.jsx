@@ -42,7 +42,8 @@ const Title = styled.h1`
     margin-top: -1em;
     margin-bottom: -1em;
     font-weight: 400;
-    font-size: 0.7em; text-decoration: none;
+    font-size: 0.7em; 
+    text-decoration: none;
   }
 `;
 
