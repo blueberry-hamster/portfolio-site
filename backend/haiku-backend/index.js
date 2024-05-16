@@ -7,6 +7,14 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3307; // Use the correct port for deployment
 
+// Force HTTPS middleware
+app.use((req, res, next) => {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(`https://${req.hostname}${req.url}`);
+  }
+  next();
+});
+
 const frontendOrigin = process.env.FRONTEND_ORIGIN || "http://localhost:3000"; // Use environment variable for frontend origin
 
 app.use(cors({ origin: frontendOrigin })); // Allow requests from the frontend origin

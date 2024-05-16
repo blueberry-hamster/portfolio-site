@@ -194,7 +194,7 @@ const timelineEntries = [
       "<strong> Comprehensive Fullstack Development Training:</strong>Completed App Academy's 1000-hour+ intensive Fullstack Bootcamp, learning JavaScript, Ruby on Rails, and React. This rigorous program enhanced my abilities in both front-end and back-end development, preparing me for complex web development projects.",
   },
   {
-    period: "2019 - 2023",
+    period: "2020 - 2023",
     title: "Riviera Partners: Software Engineer",
     description:
       "<ul><li><strong>Enhanced Proprietary Software:</strong> Significantly contributed to refining Riviera Partners' software, which leverages machine learning to improve recruitment in the tech/medical sector.</li><li><strong>Front-End Development Focus:</strong> Specialized in front-end development using React, Styled Components, and Tailwind, supported by a Ruby on Rails backend.</li><li><strong>Key Contributor in Product Overhauls:</strong> Played an important role in two major product overhauls, learning and applying new technologies quickly while proposing improvements to the platform.</li><li><strong>Took Initiative with Leadership:</strong> Took initiative to lead and support my team in the absence of a formal team lead, ensuring effective communication between developers, product managers, designers, and data scientists. My team actually requested to have me become the new lead during the quarterly review, but they were already in the process of hiring a new lead by then.</li><li><strong>Expanded Technical Skills and Fostered Collaboration:</strong> Worked directly with SQL to broaden my technical skills and organized online events to promote a collaborative atmosphere in a remote work environment.</li></ul>",
