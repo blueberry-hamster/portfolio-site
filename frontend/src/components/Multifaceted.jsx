@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import RedDiamond from "./Diamond";
-import FlipCard from "./FlipCard"; 
+import FlipCard from "./FlipCard";
 
-const pageBreak = "900"
+const pageBreak = "950";
 
 const Section = styled.div`
   width: 100vw;
@@ -15,7 +15,7 @@ const Section = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  
+
   * {
     transition: all 0.3s ease-in-out;
   }
@@ -28,6 +28,10 @@ const Title = styled.h1`
     margin-bottom: -1em;
     font-weight: 400;
     font-size: 0.8em;
+  }
+
+  @media (max-height: 450px) {
+    margin-bottom: -2em;
   }
 `;
 const Content = styled.div`
@@ -66,7 +70,7 @@ const RightTags = styled(TagsSection)`
 `;
 const AllTags = styled(TagsSection)`
   width: 100%;
-`
+`;
 const DiamondWrapper = styled.div`
   display: flex;
   flex: 0 1 50%; // Takes the remaining space but can shrink if necessary
@@ -94,45 +98,44 @@ const Multifaceted = () => {
       setWindowWidth(window.innerWidth);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // remove eventlistener on component unmount
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const isMobile = windowWidth < pageBreak;
-  
- const tags = [
-   {
-     id: "full-stack",
-     title: "Full-stack",
-     description:
-       "HTML, CSS, JavaScript, Python, Ruby $React + Redux, Ruby on Rails, Node.js $SQL, MongoDB, Postgres",
-     position: "left",
-   },
-   {
-     id: "collaboration",
-     title: "Collaboration",
-     description:
-       "Effective in team settings $Experienced in leadership roles $Strong interpersonal communication",
-     position: "left",
-   },
-   {
-     id: "design",
-     title: "Design",
-     description:
-       "UI/UX for web applications $creating 2D digital assets $Figma, Sketch, Adobe Photoshop, Illustrator",
-     position: "right",
-   },
-   {
-     id: "adaptability",
-     title: "Adaptability",
-     description:
-       "Thrives in dynamic environments $Versatile skill set across multiple disciplines $Rapidly assimilates new technologies",
-     position: "right",
-   },
- ];
 
+  const tags = [
+    {
+      id: "full-stack",
+      title: "Full-stack",
+      description:
+        "HTML, CSS, JavaScript, Python, Ruby $React + Redux, Ruby on Rails, Node.js $SQL, MongoDB, Postgres",
+      position: "left",
+    },
+    {
+      id: "collaboration",
+      title: "Collaboration",
+      description:
+        "Effective in team settings $Experienced in leadership roles $Strong interpersonal communication",
+      position: "left",
+    },
+    {
+      id: "design",
+      title: "Design",
+      description:
+        "UI/UX for web applications $creating 2D digital assets $Figma, Sketch, Adobe Photoshop, Illustrator",
+      position: "right",
+    },
+    {
+      id: "adaptability",
+      title: "Adaptability",
+      description:
+        "Thrives in dynamic environments $Versatile skill set across multiple disciplines $Rapidly assimilates new technologies",
+      position: "right",
+    },
+  ];
 
   const MobileLayout = () => {
     return (
@@ -141,14 +144,13 @@ const Multifaceted = () => {
           <RedDiamond />
         </DiamondWrapper>
         <AllTags>
-          {tags
-            .map((tag) => (
-              <FlipCard
-                key={tag.id}
-                frontContent={tag.title}
-                backContent={tag.description}
-              />
-            ))}
+          {tags.map((tag) => (
+            <FlipCard
+              key={tag.id}
+              frontContent={tag.title}
+              backContent={tag.description}
+            />
+          ))}
         </AllTags>
       </Content>
     );

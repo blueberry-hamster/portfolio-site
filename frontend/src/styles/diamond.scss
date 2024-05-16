@@ -30,7 +30,15 @@ $color6: rgba(155, 10, 10, 0.877);
    * {
     z-index: 10;
    }
+   // Adjust .diamond for short viewports
+   @media (max-height: 450px) {
+      width: 100vh;
+      height: 100vh;
+      max-width: 80vh;
+      max-height: 80vh;
+   }
 }
+
 
 .diamond__base {
   position: relative;
