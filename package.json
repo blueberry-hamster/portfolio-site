@@ -5,8 +5,8 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node backend/haiku-backend/index.js",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "postinstall": "cd backend/haiku-backend && npm install && cd ../.. && cd frontend && npm install && npm run build",
+    "start": "node backend/haiku-backend/index.js"
   },
   "dependencies": {
     "express": "^4.17.1",
