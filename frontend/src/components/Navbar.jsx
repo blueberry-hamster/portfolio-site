@@ -7,6 +7,7 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(5px); // For Safari and iOS
   backdrop-filter: blur(5px);
   padding: 0.5em 2em;
   position: fixed;

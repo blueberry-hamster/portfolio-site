@@ -17,7 +17,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  margin: 2em 0em 0.5em 0em;
+  margin: 2em 0em -0.5em 0em;
   text-align: center;
   p:first-child {
     margin-bottom: -1em;

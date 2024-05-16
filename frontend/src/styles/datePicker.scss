@@ -7,24 +7,31 @@
   
 }
 
-.react-datepicker__triangle {
-  ::before {
-    border-bottom-color: none;
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before {
+  border-bottom-color: rgba(0, 0, 0, 0) ;
+}
+
+.react-datepicker__day--selected {
+  background-color: $text-accent;
+  
+  &:hover {
+    background-color: $text-accent2;
   }
 }
 
 .react-datepicker__input-container {
   input {
-    font-size: 1.35em;
+    font-size: 1.5em;
     font-weight: bold;
-    color: $text-secondary;
+    color: $text-accent;
+    text-decoration: underline;
     text-align: center;
     border: none;
     transition: color 0.3s ease-in-out;
 
     &:hover {
       cursor: pointer;
-      color: $text-accent;
+      color: $text-accent2;
     }
     &:focus-visible {
       outline: none;
