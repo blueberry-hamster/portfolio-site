@@ -32,7 +32,7 @@ const generateHaikuAndImage = async () => {
     // Handle errors appropriately, e.g., retry or notify system admin
   }
 };
-// generateHaikuAndImage()
+generateHaikuAndImage()
 
 // Schedule the function to run at midnight
 const midnightJob = schedule.scheduleJob('0 0 * * *', () => {

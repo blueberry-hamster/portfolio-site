@@ -92,7 +92,9 @@ const HaikuComponent = () => {
     setError(false);
 
     fetch(
-      `http://localhost:3307/haikus/${selectedDate.toISOString().split("T")[0]}`
+      `https://jiani-fan-portfolio-e60244892674.herokuapp.com/haikus/${
+        selectedDate.toISOString().split("T")[0]
+      }`
     ) // Format the selected date properly
       .then((response) => response.json())
       .then((data) => {
