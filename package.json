@@ -2,7 +2,8 @@
   "name": "portfolio-website",
   "version": "0.1.0",
   "engines": {
-    "node": "14.x"
+    "node": "18.x",
+    "npm": ">=6.x"
   },
   "scripts": {
     "postinstall": "cd frontend && npm install && npm run build",
