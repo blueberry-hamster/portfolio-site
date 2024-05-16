@@ -5,7 +5,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "postinstall": "cd backend/haiku-backend && npm install && cd ../.. && cd frontend && npm install && npm run build",
+    "postinstall": "cd frontend && npm install && npm run build",
     "start": "node backend/haiku-backend/index.js"
   },
   "dependencies": {
