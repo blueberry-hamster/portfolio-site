@@ -16,9 +16,8 @@ const AboutContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   padding: 3em;
-  margin: -15em 0em;
   box-sizing: border-box;
 `;
 
