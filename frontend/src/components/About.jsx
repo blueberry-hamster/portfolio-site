@@ -18,6 +18,7 @@ const AboutContainer = styled.div`
   width: 100vw;
   height: 100vh;
   padding: 3em;
+  margin: -15em 0em;
   box-sizing: border-box;
 `;
 
