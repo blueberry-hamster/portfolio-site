@@ -41,7 +41,9 @@ app.get("*", (req, res) => {
 
 // Use the scheduled job
 midnightJob;
-generateMissingHaikusJob;
+if (process.env.ENABLE_GENERATE_MISSING_HAIKUS_JOB === "true") {
+  generateMissingHaikusJob;
+}
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT} :)`);
