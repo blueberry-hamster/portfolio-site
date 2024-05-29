@@ -130,7 +130,7 @@ const ContactMe = () => {
     }
 
     // Email address to send to
-    const email = "contactme@jianifan.com"; // Change to your email
+    const email = "jiani.fan@gmail.com"; 
     // Subject for the email
     const subject = "Hello, Jiani!";
     // Body for the email
@@ -155,7 +155,7 @@ const ContactMe = () => {
     <ContactContainer>
       <Title>
         <p>Contact Me 👋</p>
-        <p>contactme@jianifan.com</p>
+        <p>jiani.fan@gmail.com</p>
       </Title>
       <TextContainer>
         {error && (
