@@ -77,7 +77,9 @@ const ErrorScreen = styled.div`
 
 const HaikuComponent = () => {
   const [haikuData, setHaikuData] = useState({
-    date: new useState(new Date().toLocaleString("en-US", { timeZone: "UTC" })), // Provide a default value in desired format
+    date: new Date().toLocaleString("en-US", {
+      timeZone: "America/Los_Angeles",
+    }), // Provide a default value in Pacific Time
     haiku: "loading haiku",
     image: "",
   });
@@ -99,7 +101,9 @@ const HaikuComponent = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data && data.haiku) {
-          data.date = new Date(data.date).toLocaleDateString();
+          data.date = new Date(data.date).toLocaleDateString("en-US", {
+            timeZone: "America/Los_Angeles",
+          });
           setHaikuData(data);
         } else {
           setError(true);
@@ -123,7 +127,7 @@ const HaikuComponent = () => {
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}
         shouldCloseOnSelect={true}
-        minDate={new Date("2023-12-29")} 
+        minDate={new Date("2023-12-29")}
         maxDate={maxDate} // Set the maximum date to disable future dates
       />
       <HaikuCard>
@@ -131,7 +135,10 @@ const HaikuComponent = () => {
           <LoadingScreen>Loading...</LoadingScreen>
         ) : error ? (
           <ErrorScreen>
-            <p>No haiku found for this date. <br/> Please select a different date.</p>
+            <p>
+              No haiku found for this date. <br /> Please select a different
+              date.
+            </p>
           </ErrorScreen>
         ) : (
           <>
