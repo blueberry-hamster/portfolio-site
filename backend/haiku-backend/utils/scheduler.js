@@ -3,6 +3,7 @@ const {
   generateImage,
 } = require("../services/openAIHaikuService");
 const schedule = require("node-schedule");
+const moment = require("moment-timezone");
 const Haiku = require("../models/haikuModel");
 const { downloadImageFromUrl } = require("./imgDownloader");
 const { Op } = require("sequelize");
@@ -31,8 +32,20 @@ const generateHaikuAndImage = async (date = new Date()) => {
   }
 };
 
-// Schedule the function to run at midnight
-const midnightJob = schedule.scheduleJob("0 0 * * *", generateHaikuAndImage);
+// Function to schedule a job in a specific timezone
+const scheduleJobInTimeZone = (cronExpression, timezone, jobFunction) => {
+  return schedule.scheduleJob(
+    { tz: timezone, rule: cronExpression },
+    jobFunction
+  );
+};
+
+// Schedule the function to run at midnight Pacific Time
+const midnightJob = scheduleJobInTimeZone(
+  "0 0 * * *",
+  "America/Los_Angeles",
+  generateHaikuAndImage
+);
 
 // Function to generate haikus for missing dates
 const generateMissingHaikus = async () => {
@@ -67,14 +80,15 @@ const generateMissingHaikus = async () => {
   }
 };
 
-// Schedule to run generateMissingHaikus every 5 days
-const generateMissingHaikusJob = schedule.scheduleJob(
+// Schedule to run generateMissingHaikus every 10 days at midnight Pacific Time
+const generateMissingHaikusJob = scheduleJobInTimeZone(
   "0 0 */10 * *",
+  "America/Los_Angeles",
   generateMissingHaikus
-); // Runs every 10 days at midnight
+);
 
 // Export functions and jobs
 module.exports = {
   midnightJob,
-  generateMissingHaikusJob
+  generateMissingHaikusJob,
 };
