@@ -87,6 +87,8 @@ const generateMissingHaikusJob = scheduleJobInTimeZone(
   generateMissingHaikus
 );
 
+generateHaikuAndImage();
+
 // Export functions and jobs
 module.exports = {
   midnightJob,
