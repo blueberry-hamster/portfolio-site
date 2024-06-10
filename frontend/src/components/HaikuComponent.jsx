@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import colors from "../styles/_variables.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "../styles/datePicker.scss";
+import moment from "moment-timezone";
 
 const Container = styled.div`
   display: flex;
@@ -77,33 +78,33 @@ const ErrorScreen = styled.div`
 
 const HaikuComponent = () => {
   const [haikuData, setHaikuData] = useState({
-    date: new Date().toLocaleString("en-US", {
-      timeZone: "America/Los_Angeles",
-    }), // Provide a default value in Pacific Time
+    date: moment().tz("America/Los_Angeles").format(), // Provide a default value in Pacific Time
     haiku: "loading haiku",
     image: "",
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with a valid date object
+
   // Calculate the maxDate to disable future dates
-  const maxDate = new Date();
-  maxDate.setHours(23, 59, 59, 999);
+  const maxDate = moment().tz("America/Los_Angeles").endOf("day").toDate();
 
   useEffect(() => {
     setError(false);
 
     fetch(
-      `https://jiani-fan-portfolio-e60244892674.herokuapp.com/haikus/${
-        selectedDate.toISOString().split("T")[0]
-      }`
+      `https://jiani-fan-portfolio-e60244892674.herokuapp.com/haikus/${moment(
+        selectedDate
+      )
+        .tz("America/Los_Angeles")
+        .format("YYYY-MM-DD")}`
     ) // Format the selected date properly
       .then((response) => response.json())
       .then((data) => {
         if (data && data.haiku) {
-          data.date = new Date(data.date).toLocaleDateString("en-US", {
-            timeZone: "America/Los_Angeles",
-          });
+          data.date = moment(data.date)
+            .tz("America/Los_Angeles")
+            .format("MM/DD/YYYY");
           setHaikuData(data);
         } else {
           setError(true);
