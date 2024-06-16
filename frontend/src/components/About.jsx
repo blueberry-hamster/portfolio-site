@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import colors from "../styles/_variables.scss";
 
-import linkedinIcon from "../assets/linkedin.svg"; 
-import githubIcon from "../assets/github.svg"; 
-import resumeIcon from "../assets/resume.png"
+import linkedinIcon from "../assets/linkedin.svg";
+import githubIcon from "../assets/github.svg";
+import ResumeButton from "./ResumeButton";
 import avatar from "../assets/meavatar.png";
 
 const pageBreak = "900";
@@ -62,6 +62,7 @@ const LinksContainer = styled.div`
   margin-top: 1.5em;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 20px; // Space between icons
 
   @media (max-width: ${pageBreak + "px"}) {
@@ -103,6 +104,7 @@ const AboutMe = () => {
         <img src={avatar} alt="Jiani avatar" />
       </Content>
       <LinksContainer>
+        <ResumeButton />
         <a
           href="https://github.com/blueberry-hamster"
           target="_blank"
@@ -118,14 +120,6 @@ const AboutMe = () => {
           title="LinkedIn"
         >
           <SocialIcon src={linkedinIcon} alt="LinkedIn" />
-        </a>
-        <a
-          href="https://docs.google.com/document/d/1z-wYnrEx1-lPmTEoEKhYZ5FlTAc-OuAuPKawBVdWqHY/edit?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Resume"
-        >
-          <SocialIcon src={resumeIcon} alt="Resume" />
         </a>
       </LinksContainer>
     </AboutContainer>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import colors from "../styles/_variables.scss";
 
+import ResumeButton from "./ResumeButton";
+
 const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
@@ -153,12 +155,15 @@ const Navbar = () => {
       {windowWidth >= 900 ? (
         <NavMenu>
           <NavLink onClick={() => scrollToSection("about-me")}>About</NavLink>
-          <NavLink onClick={() => scrollToSection("multifaceted")}>Multifaceted</NavLink>
+          <NavLink onClick={() => scrollToSection("multifaceted")}>
+            Multifaceted
+          </NavLink>
           <NavLink onClick={() => scrollToSection("timeline")}>
             Timeline
           </NavLink>
           <NavLink onClick={() => scrollToSection("haiku")}>Haikus</NavLink>
           <NavLink onClick={() => scrollToSection("contact")}>Contact</NavLink>
+          <ResumeButton />
         </NavMenu>
       ) : (
         <HamburgerMenu onClick={() => setMenuVisible(!menuVisible)}>
@@ -167,7 +172,9 @@ const Navbar = () => {
           <HamburgerIcon />
 
           <DropdownMenu show={menuVisible}>
-            <DropdownItem onClick={() => scrollToSection("landing")}>Home</DropdownItem>
+            <DropdownItem onClick={() => scrollToSection("landing")}>
+              Home
+            </DropdownItem>
             <DropdownItem onClick={() => scrollToSection("about-me")}>
               About Me
             </DropdownItem>
@@ -182,6 +189,9 @@ const Navbar = () => {
             </DropdownItem>
             <DropdownItem onClick={() => scrollToSection("contact")}>
               Contact
+            </DropdownItem>
+            <DropdownItem>
+              <ResumeButton />
             </DropdownItem>
           </DropdownMenu>
         </HamburgerMenu>

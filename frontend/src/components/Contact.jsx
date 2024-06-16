@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import colors from "../styles/_variables.scss";
 
+import ResumeButton from "./ResumeButton";
+
 const pageBreak = "900";
 const pageBreakS = "750";
 
@@ -157,6 +159,7 @@ const ContactMe = () => {
         <p>Contact Me 👋</p>
         <p>contact@jianifan.com</p>
       </Title>
+        
       <TextContainer>
         {error && (
           <ErrorMessage>Oops, don't forget to write a message :)</ErrorMessage>
