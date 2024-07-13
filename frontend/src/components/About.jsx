@@ -114,7 +114,7 @@ const AboutMe = () => {
           <SocialIcon src={githubIcon} alt="GitHub" />
         </a>
         <a
-          href="https://www.linkedin.com/in/jiani-fan-38b11096/"
+          href="https://www.linkedin.com/in/jiani-fan/"
           target="_blank"
           rel="noopener noreferrer"
           title="LinkedIn"
