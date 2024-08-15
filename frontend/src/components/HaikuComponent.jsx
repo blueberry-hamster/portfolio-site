@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import colors from "../styles/_variables.scss";
@@ -15,6 +15,13 @@ const Container = styled.div`
   width: 100vw;
   box-sizing: border-box;
   background-color: ${colors.white};
+  * {
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Title = styled.h1`
@@ -76,6 +83,29 @@ const ErrorScreen = styled.div`
   text-align: center;
 `;
 
+const NavigationButton = styled.button`
+  display: inline-block;
+  background-color: ${colors.white};
+  color: ${colors.textAccent};
+  background-color: none;
+  border: none;
+  padding: 0.25em 0.5em;
+  margin: 1em;
+  font-size: 2em;
+  border-radius: 1em;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    color: ${colors.textAccent2};
+  }
+
+  &.disabled {
+    color: ${colors.lightGrey};
+    cursor: default;
+  }
+`;
+
 const HaikuComponent = () => {
   const [haikuData, setHaikuData] = useState({
     date: moment().tz("America/Los_Angeles").format(), // Provide a default value in Pacific Time
@@ -85,8 +115,10 @@ const HaikuComponent = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with a valid date object
+  const containerRef = useRef(null);
 
   // Calculate the maxDate to disable future dates
+  const minDate = new Date("2023-12-29");
   const maxDate = moment().tz("America/Los_Angeles").endOf("day").toDate();
 
   useEffect(() => {
@@ -118,8 +150,54 @@ const HaikuComponent = () => {
       });
   }, [selectedDate]);
 
+  // handle general navigation
+
+  const isNextDisabled = moment(selectedDate).isSameOrAfter(maxDate, "day");
+  const isPrevDisabled = moment(selectedDate).isSameOrBefore(minDate, "day");
+
+  const handleNext = () => {
+    const nextDate = moment(selectedDate).add(1, "day").toDate();
+    if (nextDate <= maxDate) {
+      setSelectedDate(nextDate);
+    }
+  };
+
+  const handlePrev = () => {
+    const prevDate = moment(selectedDate).subtract(1, "day").toDate();
+    if (prevDate >= minDate) {
+      setSelectedDate(prevDate);
+    }
+  };
+
+  // handle keyboard events for navigation
+
+  const handleKeyDown = (event) => {
+    if (event.key === "ArrowRight" && !isNextDisabled) {
+      handleNext();
+    } else if (event.key === "ArrowLeft" && !isPrevDisabled) {
+      handlePrev();
+    }
+  };
+
+  useEffect(() => {
+    const containerElement = containerRef.current;
+
+    if (containerElement) {
+      containerElement.focus();
+      containerElement.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        containerElement.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+  }, [handleNext, handlePrev, isNextDisabled, isPrevDisabled]);
+
   return (
-    <Container>
+    <Container
+      ref={containerRef}
+      tabIndex="0" // maek the container focusable
+      aria-label="Haiku Carousel"
+    >
       <Title>
         <p>AI Generated</p>
         <p>Daily Haiku</p>
@@ -128,7 +206,7 @@ const HaikuComponent = () => {
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}
         shouldCloseOnSelect={true}
-        minDate={new Date("2023-12-29")}
+        minDate={minDate}
         maxDate={maxDate} // Set the maximum date to disable future dates
       />
       <HaikuCard>
@@ -152,6 +230,22 @@ const HaikuComponent = () => {
           </>
         )}
       </HaikuCard>
+      <div>
+        <NavigationButton
+          onClick={handlePrev}
+          disabled={isPrevDisabled}
+          className={isPrevDisabled ? "disabled" : ""}
+        >
+          {"<"}
+        </NavigationButton>
+        <NavigationButton
+          onClick={handleNext}
+          disabled={isNextDisabled}
+          className={isNextDisabled ? "disabled" : ""}
+        >
+          {">"}
+        </NavigationButton>
+      </div>
     </Container>
   );
 };
