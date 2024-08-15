@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../styles/datePicker.scss";
 import moment from "moment-timezone";
 
+// Styled components for the layout
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,13 +21,14 @@ const Container = styled.div`
   }
 
   &:focus {
-    outline: none;
+    outline: none; // Remove focus outline for the container
   }
 `;
 
 const Title = styled.h1`
   margin: 2em 0em -0.5em 0em;
   text-align: center;
+
   p:first-child {
     margin-bottom: -1em;
     font-weight: 400;
@@ -55,8 +57,8 @@ const HaikuText = styled.div`
 `;
 
 const HaikuImage = styled.img`
-  width: 100%; // Make the width fill the container
-  height: auto; // Set height to auto to maintain aspect ratio
+  width: 100%; // Fill the container's width
+  height: auto; // Maintain aspect ratio
   aspect-ratio: 1 / 1; // Ensure the image is always square
   object-fit: cover; // Cover the container fully without stretching
   border-radius: 0.6em;
@@ -87,7 +89,6 @@ const NavigationButton = styled.button`
   display: inline-block;
   background-color: ${colors.white};
   color: ${colors.textAccent};
-  background-color: none;
   border: none;
   padding: 0.25em 0.5em;
   margin: 1em;
@@ -108,21 +109,22 @@ const NavigationButton = styled.button`
 
 const HaikuComponent = () => {
   const [haikuData, setHaikuData] = useState({
-    date: moment().tz("America/Los_Angeles").format(), // Provide a default value in Pacific Time
+    date: moment().tz("America/Los_Angeles").format(), // Default date in Pacific Time
     haiku: "loading haiku",
     image: "",
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with a valid date object
-  const containerRef = useRef(null);
+  const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with the current date
+  const containerRef = useRef(null); // Reference for the container to manage focus
 
-  // Calculate the maxDate to disable future dates
+  // Set the range of valid dates for the DatePicker
   const minDate = new Date("2023-12-29");
   const maxDate = moment().tz("America/Los_Angeles").endOf("day").toDate();
 
+  // Fetch the haiku data whenever the selectedDate changes
   useEffect(() => {
-    setError(false);
+    setError(false); // Reset error state on date change
 
     fetch(
       `https://jiani-fan-portfolio-e60244892674.herokuapp.com/haikus/${moment(
@@ -130,31 +132,32 @@ const HaikuComponent = () => {
       )
         .tz("America/Los_Angeles")
         .format("YYYY-MM-DD")}`
-    ) // Format the selected date properly
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data && data.haiku) {
+          // Format the date and update haiku data
           data.date = moment(data.date)
             .tz("America/Los_Angeles")
             .format("MM/DD/YYYY");
           setHaikuData(data);
         } else {
-          setError(true);
+          setError(true); // Set error if no haiku is found
         }
-        setLoading(false);
+        setLoading(false); // Set loading to false after data fetch
       })
       .catch((error) => {
         console.error("Error fetching haiku:", error);
         setLoading(false);
-        setError(true);
+        setError(true); // Set error if fetch fails
       });
   }, [selectedDate]);
 
-  // handle general navigation
-
+  // Determine if the navigation buttons should be disabled
   const isNextDisabled = moment(selectedDate).isSameOrAfter(maxDate, "day");
   const isPrevDisabled = moment(selectedDate).isSameOrBefore(minDate, "day");
 
+  // Handle navigation to the next date
   const handleNext = () => {
     const nextDate = moment(selectedDate).add(1, "day").toDate();
     if (nextDate <= maxDate) {
@@ -162,6 +165,7 @@ const HaikuComponent = () => {
     }
   };
 
+  // Handle navigation to the previous date
   const handlePrev = () => {
     const prevDate = moment(selectedDate).subtract(1, "day").toDate();
     if (prevDate >= minDate) {
@@ -169,8 +173,7 @@ const HaikuComponent = () => {
     }
   };
 
-  // handle keyboard events for navigation
-
+  // Handle keyboard navigation for date changes
   const handleKeyDown = (event) => {
     if (event.key === "ArrowRight" && !isNextDisabled) {
       handleNext();
@@ -179,15 +182,16 @@ const HaikuComponent = () => {
     }
   };
 
+  // Add keyboard event listener on component focus and remove it on blur/unmount
   useEffect(() => {
     const containerElement = containerRef.current;
 
     if (containerElement) {
-      containerElement.focus();
-      containerElement.addEventListener("keydown", handleKeyDown);
+      containerElement.focus(); // Focus the container
+      containerElement.addEventListener("keydown", handleKeyDown); // Add keyboard event listener
 
       return () => {
-        containerElement.removeEventListener("keydown", handleKeyDown);
+        containerElement.removeEventListener("keydown", handleKeyDown); // Clean up event listener
       };
     }
   }, [handleNext, handlePrev, isNextDisabled, isPrevDisabled]);
@@ -195,8 +199,8 @@ const HaikuComponent = () => {
   return (
     <Container
       ref={containerRef}
-      tabIndex="0" // maek the container focusable
-      aria-label="Haiku Carousel"
+      tabIndex="0" // Make the container focusable
+      aria-label="Haiku Carousel" // Screen reader description
     >
       <Title>
         <p>AI Generated</p>
@@ -207,7 +211,7 @@ const HaikuComponent = () => {
         onChange={(date) => setSelectedDate(date)}
         shouldCloseOnSelect={true}
         minDate={minDate}
-        maxDate={maxDate} // Set the maximum date to disable future dates
+        maxDate={maxDate} // Disable future dates
       />
       <HaikuCard>
         {loading ? (
@@ -235,6 +239,7 @@ const HaikuComponent = () => {
           onClick={handlePrev}
           disabled={isPrevDisabled}
           className={isPrevDisabled ? "disabled" : ""}
+          aria-label="Previous Date" // Accessibility label
         >
           {"<"}
         </NavigationButton>
@@ -242,6 +247,7 @@ const HaikuComponent = () => {
           onClick={handleNext}
           disabled={isNextDisabled}
           className={isNextDisabled ? "disabled" : ""}
+          aria-label="Next Date" // Accessibility label
         >
           {">"}
         </NavigationButton>
