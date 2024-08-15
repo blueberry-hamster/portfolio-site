@@ -5,6 +5,21 @@ import colors from "../styles/_variables.scss";
 import "react-datepicker/dist/react-datepicker.css";
 import "../styles/datePicker.scss";
 import moment from "moment-timezone";
+import { keyframes } from "styled-components";
+
+// Define the glow animation using keyframes
+const glow = keyframes`
+  0% {
+    filter: drop-shadow(0em 0em 0.2em transparent);
+  }
+  50% {
+    filter: drop-shadow(0em 0em 0.25em ${colors.textAccent});
+  }
+  100% {
+    filter: drop-shadow(0em 0em 0.2em transparent);
+  }
+`;
+
 
 // Styled components for the layout
 const Container = styled.div`
@@ -87,7 +102,7 @@ const ErrorScreen = styled.div`
 
 const NavigationButton = styled.button`
   display: inline-block;
-  background-color: ${colors.white};
+  background-color: transparent;
   color: ${colors.textAccent};
   border: none;
   padding: 0.25em 0.5em;
@@ -105,6 +120,11 @@ const NavigationButton = styled.button`
     color: ${colors.lightGrey};
     cursor: default;
   }
+
+  // Apply glow animation when the button has the "glow" class
+  &.glow {
+    animation: ${glow} 0.5s ease-in-out;
+  }
 `;
 
 const HaikuComponent = () => {
@@ -116,6 +136,7 @@ const HaikuComponent = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with the current date
+  const [glowButton, setGlowButton] = useState(null); // Track which button should glow
   const containerRef = useRef(null); // Reference for the container to manage focus
 
   // Set the range of valid dates for the DatePicker
@@ -162,6 +183,7 @@ const HaikuComponent = () => {
     const nextDate = moment(selectedDate).add(1, "day").toDate();
     if (nextDate <= maxDate) {
       setSelectedDate(nextDate);
+      triggerGlow("next"); // Trigger glow on the next button
     }
   };
 
@@ -170,6 +192,7 @@ const HaikuComponent = () => {
     const prevDate = moment(selectedDate).subtract(1, "day").toDate();
     if (prevDate >= minDate) {
       setSelectedDate(prevDate);
+      triggerGlow("prev"); // Trigger glow on the previous button
     }
   };
 
@@ -181,20 +204,24 @@ const HaikuComponent = () => {
       handlePrev();
     }
   };
+  // Trigger the glow effect on the button
+  const triggerGlow = (button) => {
+    setGlowButton(button);
+    setTimeout(() => setGlowButton(null), 500); // remove glow after delay
+  }
+    // Add keyboard event listener on component focus and remove it on blur/unmount
+    useEffect(() => {
+      const containerElement = containerRef.current;
 
-  // Add keyboard event listener on component focus and remove it on blur/unmount
-  useEffect(() => {
-    const containerElement = containerRef.current;
+      if (containerElement) {
+        containerElement.focus(); // Focus the container
+        containerElement.addEventListener("keydown", handleKeyDown); // Add keyboard event listener
 
-    if (containerElement) {
-      containerElement.focus(); // Focus the container
-      containerElement.addEventListener("keydown", handleKeyDown); // Add keyboard event listener
-
-      return () => {
-        containerElement.removeEventListener("keydown", handleKeyDown); // Clean up event listener
-      };
-    }
-  }, [handleNext, handlePrev, isNextDisabled, isPrevDisabled]);
+        return () => {
+          containerElement.removeEventListener("keydown", handleKeyDown); // Clean up event listener
+        };
+      }
+    }, [handleNext, handlePrev, isNextDisabled, isPrevDisabled]);
 
   return (
     <Container
@@ -238,7 +265,9 @@ const HaikuComponent = () => {
         <NavigationButton
           onClick={handlePrev}
           disabled={isPrevDisabled}
-          className={isPrevDisabled ? "disabled" : ""}
+          className={`${isPrevDisabled ? "disabled" : ""} ${
+            glowButton === "prev" ? "glow" : ""
+          }`}
           aria-label="Previous Date" // Accessibility label
         >
           {"<"}
@@ -246,7 +275,9 @@ const HaikuComponent = () => {
         <NavigationButton
           onClick={handleNext}
           disabled={isNextDisabled}
-          className={isNextDisabled ? "disabled" : ""}
+          className={`${isNextDisabled ? "disabled" : ""} ${
+            glowButton === "next" ? "glow" : ""
+          }`}
           aria-label="Next Date" // Accessibility label
         >
           {">"}
