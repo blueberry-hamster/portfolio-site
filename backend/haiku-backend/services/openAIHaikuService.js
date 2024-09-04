@@ -23,7 +23,7 @@ const generateHaiku = async () => {
         },
         { role: "user", content: prompt },
       ],
-      model: "gpt-4",
+      model: "gpt-4o",
     });
 
     return completion.choices[0].message.content.replace(/\n/g, "<br />");
@@ -34,7 +34,7 @@ const generateHaiku = async () => {
 };
 
 const generateImage = async (haikuText) => {
-  const prompt = `Paint a traditional minimal elegant beautiful awe-inspiring captivating peaceful classic historical asian oriental watercolor wet translucent look. It should look museum quality. Make sure it evokes the imagery, mood, and color scheme of this beautiful scene: ${haikuText} not cartoony not funny not modern not digital not sharp not blocky no inkspots pure landscape`;
+  const prompt = `Paint a traditional minimal elegant beautiful awe-inspiring captivating peaceful classic historical asian oriental watercolor wet translucent look. It should look museum quality. Make sure it evokes the imagery, mood, and color scheme of this beautiful scene: ${haikuText} Please note to make it not cartoony not funny not modern not digital not sharp not blocky no inkspots no text no words pure landscape pure watercolor`;
 
   try {
     const response = await openai.images.generate({
