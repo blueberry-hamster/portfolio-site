@@ -1,23 +1,27 @@
 // haikuController.js
 
-const express = require('express');
-const { Op } = require('sequelize');
-const Haiku = require('../models/haikuModel');
-const { downloadImageFromUrl } = require('../utils/imgDownloader');
+const express = require("express");
+const { Op } = require("sequelize");
+const Haiku = require("../models/Haikus");
+const Like = require("../models/Likes")
+const { downloadImageFromUrl } = require("../utils/imgDownloader");
 
 const router = express.Router();
 
 // Function to format haiku data
-function formatHaikuData(haikuData) {
+async function formatHaikuData(haikuData) {
+  const likeCount = await Like.count({where: { haikuId: haikuData.id}})
+  
   return {
     haiku: haikuData.haiku,
-    image: `data:image/jpeg;base64,${haikuData.image.toString('base64')}`,
-    date: haikuData.createdAt
+    image: `data:image/jpeg;base64,${haikuData.image.toString("base64")}`,
+    date: haikuData.createdAt,
+    likes: likeCount,
   };
 }
 
 // Create a haiku
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { haiku, image_url } = req.body;
     const transformedImageBuffer = await downloadImageFromUrl(image_url);
@@ -29,49 +33,56 @@ router.post('/', async (req, res) => {
 });
 
 /// Get the newest haiku with image in the desired format
-router.get('/newest', async (req, res) => {
+router.get("/newest", async (req, res) => {
   try {
     // Find the newest haiku with the latest timestamp
     const newestHaiku = await Haiku.findOne({
-      order: [['createdAt', 'DESC']], // Order by createdAt in descending order (latest first)
+      order: [["createdAt", "DESC"]], // Order by createdAt in descending order (latest first)
     });
 
     if (!newestHaiku) {
-      res.status(404).json({ error: 'No haiku found' });
+      res.status(404).json({ error: "No haiku found" });
       return;
     }
 
     res.json(formatHaikuData(newestHaiku));
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred while fetching the newest haiku' });
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching the newest haiku" });
   }
 });
 
 // Get haikus for the carousel starting with the newest ones
-router.get('/carousel', async (req, res) => {
+router.get("/carousel", async (req, res) => {
   try {
     const { offset, limit } = req.query;
 
     // Query the database to get haikus, ordered by createdAt in descending order (latest first)
     const haikus = await Haiku.findAll({
-      order: [['createdAt', 'DESC']],
+      order: [["createdAt", "DESC"]],
       offset: parseInt(offset || 0, 10), // Parse offset as an integer
-      limit: parseInt(limit || 5, 10),    // Parse limit as an integer
+      limit: parseInt(limit || 5, 10), // Parse limit as an integer
     });
 
     // Format each haiku and return as an array
-    const formattedHaikus = haikus.map((haikuData) => formatHaikuData(haikuData));
+    const formattedHaikus = haikus.map((haikuData) =>
+      formatHaikuData(haikuData)
+    );
 
     res.json({ haikus: formattedHaikus });
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred while fetching haikus for the carousel' });
+    res
+      .status(500)
+      .json({
+        error: "An error occurred while fetching haikus for the carousel",
+      });
   }
 });
 
-
 // Get haikus on a specific date
 // ex "/haikus/2023-12-31"
-router.get('/:date', async (req, res) => {
+router.get("/:date", async (req, res) => {
   try {
     const { date } = req.params;
     const startOfDay = new Date(date);
@@ -87,7 +98,7 @@ router.get('/:date', async (req, res) => {
           [Op.lt]: endOfDay,
         },
       },
-      order: [['createdAt', 'DESC']],
+      order: [["createdAt", "DESC"]],
     });
 
     // Format each haiku and return as an array
@@ -95,9 +106,28 @@ router.get('/:date', async (req, res) => {
 
     res.json(formattedHaiku);
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred while fetching haikus' });
+    res.status(500).json({ error: "An error occurred while fetching haikus" });
   }
 });
 
+// Like a haiku
+const likeHaiku = async (req, res) => {
+  try {
+    const { haikuId } = req.params;
+    const visitorId = req.body.visitorId // get ingerprint id from request body
+
+    // check if user already liked the haiku
+    const existingLike = await Like.findOne({where: {haikuId, visitorId}})
+    if (existingLike) {
+      return res.status(400).json({message: 'User has already liked this haiku'})
+    }
+    // else they can like the haiku
+    await Like.create({haikuId, visitorId})
+    return { message: "Haiku was liked"}
+  } catch (error) {
+    console.log("Error liking a haiku: ", error)
+    return res.status(500).json({message: 'Internal service error.'})
+  }
+}
 
 module.exports = router;

@@ -4,7 +4,7 @@ const {
 } = require("../services/openAIHaikuService");
 const schedule = require("node-schedule");
 const moment = require("moment-timezone");
-const Haiku = require("../models/haikuModel");
+const Haiku = require("../models/Haikus");
 const { downloadImageFromUrl } = require("./imgDownloader");
 const { Op } = require("sequelize");
 
